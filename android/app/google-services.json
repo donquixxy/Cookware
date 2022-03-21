@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "93967162277",
+    "project_id": "getxcook",
+    "storage_bucket": "getxcook.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93967162277:android:528bf485d1ada76a35e64c",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "93967162277-brb9g52cpjuh29c6btaeafj0j82n082u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_application_1",
+            "certificate_hash": "91c758d090b7309db3e86978567ae0ce3066ea10"
+          }
+        },
+        {
+          "client_id": "93967162277-5jft1d3dsj4g25trs6a19lj39dq7njv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJm7x_DGjjghpCw4ZuPkD8du6QtFW-TX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "93967162277-5jft1d3dsj4g25trs6a19lj39dq7njv3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
