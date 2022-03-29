@@ -34,9 +34,11 @@ class LoginController extends GetxController with StateMixin {
         if (!_exist.exists) {
           try {
             UserModels _newUser = UserModels(
-                email: userCredential.user!.email!,
-                displayName: userCredential.user!.displayName!,
-                uid: userCredential.user!.uid);
+              email: userCredential.user!.email!,
+              displayName: userCredential.user!.displayName!,
+              uid: userCredential.user!.uid,
+              // likedItems: []
+            );
             final newUserData = await _collectionRefs
                 .doc(userCredential.user!.uid)
                 .set(_newUser.toJson());

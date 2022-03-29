@@ -7,10 +7,16 @@ import 'package:get/get.dart';
 class OverviewController extends GetxController {
   final _collectionRefs = FirebaseFirestore.instance.collection('Recipes');
   final auth = FirebaseAuth.instance;
+  var currentIndex = 0.obs;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> streamDataOnDb() {
     final _snapshot = _collectionRefs.snapshots();
     return _snapshot;
+  }
+
+  void changeCurrentIndexScreen(int index) {
+    currentIndex.value = index;
+    update();
   }
 
   void deleteData(String docId) {

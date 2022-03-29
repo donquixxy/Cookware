@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/data/models/recipe_models.dart';
 
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../controllers/detailscreen_controller.dart';
 
 class DetailscreenView extends GetView<DetailscreenController> {
   Recipes resep = Get.arguments[0];
+  String documentId = Get.arguments[1];
   var appBar2 = AppBar(
     title: const Text('DetailscreenView'),
     centerTitle: true,
@@ -39,14 +39,28 @@ class DetailscreenView extends GetView<DetailscreenController> {
                   image: NetworkImage(resep.imageUrl), fit: BoxFit.cover)),
           child: SafeArea(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 IconButton(
                     onPressed: () {
                       Get.back();
                     },
-                    icon: const Icon(Icons.arrow_back))
+                    icon: const Icon(Icons.arrow_back)),
+                IconButton(
+                  onPressed: () {
+                    controller.addLikedIdToDB(
+                        docId: documentId,
+                        currentUserId:
+                            controller.firebaseAuth.currentUser!.uid);
+                    // controller.addDataToList(documentId: documentId);
+                    // controller.addLikedIdToDb(
+                    //     documentId: documentId,
+                    //     currentUser: FirebaseAuth.instance.currentUser!);
+                  },
+                  icon: const Icon(Icons.favorite_border),
+                  color: Colors.pink,
+                )
               ],
             ),
           ),

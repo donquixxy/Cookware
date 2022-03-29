@@ -95,40 +95,43 @@ class EditDataController extends GetxController {
 
   Future<void> updateDataOnDb(String id, String currentUid) async {
     try {
-      // if (resep.value.uidCreator == currentUid) {
-      Recipes newData = Recipes(
-          name: namaResepController.text,
-          description: deskripsiController.text,
-          listIngredients: chipWord,
-          cookTime: cookTimeController.text,
-          recipeBy: firebaseAuth.currentUser!.displayName!,
-          imageUrl: oldData.imageUrl,
-          uidCreator: firebaseAuth.currentUser!.uid);
+      if (resep.value.uidCreator == currentUid) {
+        Recipes newData = Recipes(
+            name: namaResepController.text,
+            description: deskripsiController.text,
+            listIngredients: chipWord,
+            cookTime: cookTimeController.text,
+            recipeBy: firebaseAuth.currentUser!.displayName!,
+            imageUrl: oldData.imageUrl,
+            uidCreator: firebaseAuth.currentUser!.uid);
 
-      firebaseFirestore.collection('Recipes').doc(id).update(newData.toJson());
-      // Get.defaultDialog(
-      //     title: 'Data Updated',
-      //     middleText: 'Data berhasil terupdate',
-      //     textConfirm: 'Ok',
-      //     onConfirm: () {
-      //       Get.back();
-      //       Get.back();
-      //     });
+        firebaseFirestore
+            .collection('Recipes')
+            .doc(id)
+            .update(newData.toJson());
+        // Get.defaultDialog(
+        //     title: 'Data Updated',
+        //     middleText: 'Data berhasil terupdate',
+        //     textConfirm: 'Ok',
+        //     onConfirm: () {
+        //       Get.back();
+        //       Get.back();
+        //     });
 
-      Get.snackbar(
-        'Data Updated',
-        'Data Berhasil Terupdate',
-        showProgressIndicator: true,
-      );
-      // } else {
-      //   Get.defaultDialog(
-      //       title: 'Error',
-      //       middleText: 'Gagal Mengupdate, bukan data anda',
-      //       textConfirm: 'Ok',
-      //       onConfirm: () {
-      //         Get.back();
-      //       });
-      // }
+        Get.snackbar(
+          'Data Updated',
+          'Data Berhasil Terupdate',
+          showProgressIndicator: true,
+        );
+      } else {
+        Get.defaultDialog(
+            title: 'Error',
+            middleText: 'Gagal Mengupdate, bukan data anda',
+            textConfirm: 'Ok',
+            onConfirm: () {
+              Get.back();
+            });
+      }
       resep.refresh();
     } on FirebaseException catch (error) {
       Get.defaultDialog(

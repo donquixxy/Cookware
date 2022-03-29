@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/addData/bindings/add_data_binding.dart';
 import '../modules/addData/views/add_data_view.dart';
+import '../modules/bookmark/bindings/bookmark_binding.dart';
+import '../modules/bookmark/views/bookmark_view.dart';
 import '../modules/detailscreen/bindings/detailscreen_binding.dart';
 import '../modules/detailscreen/views/detailscreen_view.dart';
 import '../modules/editData/bindings/edit_data_binding.dart';
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.DETAILSCREEN,
       page: () => DetailscreenView(),
       binding: DetailscreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOKMARK,
+      page: () => BookmarkView(),
+      binding: BookmarkBinding(),
     ),
   ];
 }

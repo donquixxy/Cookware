@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/controllers/image_picker_controller.dart';
-import 'package:flutter_application_1/app/data/models/recipe_models.dart';
 
 import 'package:get/get.dart';
 
@@ -10,13 +9,9 @@ import 'dart:math';
 class AddDataView extends GetView<AddDataController> {
   @override
   Widget build(BuildContext context) {
-    // var controller = Get.put(AddDataController());
+    var controller = Get.put(AddDataController());
     var imagePickerController = Get.put(ImagePickerController());
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('AddDataView'),
-        centerTitle: true,
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -145,11 +140,6 @@ class AddDataView extends GetView<AddDataController> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            controller.addDataToFirebase(imagePickerController.image!);
-          },
-          child: const Icon(Icons.add)),
     );
   }
 }

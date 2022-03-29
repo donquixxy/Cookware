@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/controllers/users_controller_controller.dart';
-import 'package:flutter_application_1/app/modules/overview/views/overview_view.dart';
+import 'package:flutter_application_1/app/modules/home/views/home_view.dart';
 
 import 'package:get/get.dart';
 
@@ -21,7 +21,7 @@ class LoginView extends GetView<LoginController> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.active) {
                 if (snapshot.data != null) {
-                  return OverviewView();
+                  return HomeView();
                 }
               }
               return Padding(

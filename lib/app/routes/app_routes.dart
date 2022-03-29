@@ -11,6 +11,7 @@ abstract class Routes {
   static const ADD_DATA = _Paths.ADD_DATA;
   static const EDIT_DATA = _Paths.EDIT_DATA;
   static const DETAILSCREEN = _Paths.DETAILSCREEN;
+  static const BOOKMARK = _Paths.BOOKMARK;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const ADD_DATA = '/add-data';
   static const EDIT_DATA = '/edit-data';
   static const DETAILSCREEN = '/detailscreen';
+  static const BOOKMARK = '/bookmark';
 }
