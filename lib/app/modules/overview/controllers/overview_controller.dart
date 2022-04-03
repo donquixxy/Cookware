@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/data/models/recipe_models.dart';
 import 'package:flutter_application_1/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -8,10 +9,19 @@ class OverviewController extends GetxController {
   final _collectionRefs = FirebaseFirestore.instance.collection('Recipes');
   final auth = FirebaseAuth.instance;
   var currentIndex = 0.obs;
+  List<Recipes> listOfData = [];
+
+  Color backGroundColor = Colors.black;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> streamDataOnDb() {
     final _snapshot = _collectionRefs.snapshots();
     return _snapshot;
+  }
+
+  @override
+  void onInit() {
+    fetchAllData();
+    super.onInit();
   }
 
   void changeCurrentIndexScreen(int index) {
@@ -49,6 +59,15 @@ class OverviewController extends GetxController {
               },
               child: const Text("Delete Data"))
         ]);
+  }
+
+  Future<void> fetchAllData() async {
+    var data = await _collectionRefs.get();
+
+    for (var element in data.docs) {
+      listOfData.add(Recipes.fromJson(element.data()));
+    }
+    print(listOfData);
   }
 
   // Future <bool> onWilpop(){

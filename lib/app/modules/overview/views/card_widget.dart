@@ -10,7 +10,7 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Container(
         child: Card(
           shape: const RoundedRectangleBorder(
@@ -52,11 +52,15 @@ class CardWidget extends StatelessWidget {
                         left: 20, top: 10, bottom: 10, right: 15),
                     child: Row(
                       children: [
-                        const Icon(Icons.access_time),
+                        const Icon(
+                          Icons.access_time,
+                        ),
                         const SizedBox(
                           width: 1,
                         ),
-                        Text(resep.cookTime),
+                        Text(
+                          resep.cookTime,
+                        ),
                       ],
                     ),
                   ),

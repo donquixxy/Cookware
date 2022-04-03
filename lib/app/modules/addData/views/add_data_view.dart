@@ -12,6 +12,12 @@ class AddDataView extends GetView<AddDataController> {
     var controller = Get.put(AddDataController());
     var imagePickerController = Get.put(ImagePickerController());
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          controller.addDataToFirebase(imagePickerController.image!);
+        },
+        child: const Icon(Icons.add),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
