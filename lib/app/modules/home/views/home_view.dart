@@ -13,72 +13,87 @@ class HomeView extends GetView<HomeController> {
   final controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
-    return Obx((() => Scaffold(
-        // appBar: AppBar(
-        //   elevation: 0,
-        //   shape: const RoundedRectangleBorder(
-        //     borderRadius: BorderRadius.only(
-        //         bottomLeft: Radius.circular(40),
-        //         bottomRight: Radius.circular(40)),
-        //   ),
-        //   toolbarHeight: 180,
-        //   // flexibleSpace: Container(
-        //   //   decoration: const BoxDecoration(
-        //   //     borderRadius: BorderRadius.only(
-        //   //       bottomLeft: Radius.circular(40),
-        //   //       bottomRight: Radius.circular(40),
-        //   //     ),
-        //   //   ),
-        //   // ),
-        //   // backgroundColor: Colors.transparent,
-        //   title: Container(
-        //     child: Row(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children: const [
-        //         Icon(
-        //           Icons.restaurant_menu,
-        //           color: Colors.white,
-        //         ),
-        //         Text(
-        //           'Cookware',
-        //           style: TextStyle(
-        //               color: Colors.white, fontWeight: FontWeight.bold),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        //   centerTitle: true,
-        // ),
-        body: Obx(() => IndexedStack(
-              index: controller.currentIndex.value,
-              children: [
-                OverviewView(),
-                BookmarkView(),
-                UserProfileView()
-                // AddDataView(),
+    return Obx(
+      (() => Scaffold(
+            appBar: AppBar(
+              backgroundColor: const Color.fromARGB(255, 4, 147, 114),
+              elevation: 0,
+              title: Container(
+                child: Row(children: const [
+                  Spacer(),
+                  Icon(Icons.restaurant_menu),
+                  Text("Cookware"),
+                  Spacer(),
+                ]),
+              ),
+              centerTitle: true,
+            ),
+            // appBar: AppBar(
+            //   elevation: 0,
+            //   shape: const RoundedRectangleBorder(
+            //     borderRadius: BorderRadius.only(
+            //         bottomLeft: Radius.circular(40),
+            //         bottomRight: Radius.circular(40)),
+            //   ),
+            //   toolbarHeight: 180,
+            //   // flexibleSpace: Container(
+            //   //   decoration: const BoxDecoration(
+            //   //     borderRadius: BorderRadius.only(
+            //   //       bottomLeft: Radius.circular(40),
+            //   //       bottomRight: Radius.circular(40),
+            //   //     ),
+            //   //   ),
+            //   // ),
+            //   // backgroundColor: Colors.transparent,
+            //   title: Container(
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: const [
+            //         Icon(
+            //           Icons.restaurant_menu,
+            //           color: Colors.white,
+            //         ),
+            //         Text(
+            //           'Cookware',
+            //           style: TextStyle(
+            //               color: Colors.white, fontWeight: FontWeight.bold),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            //   centerTitle: true,
+            // ),
+            body: Obx(() => IndexedStack(
+                  index: controller.currentIndex.value,
+                  children: [
+                    OverviewView(),
+                    BookmarkView(),
+                    UserProfileView()
+                    // AddDataView(),
+                  ],
+                )),
+            bottomNavigationBar: SalomonBottomBar(
+              curve: Curves.bounceOut,
+              onTap: controller.changeCurrentIndexScreen,
+              currentIndex: controller.currentIndex.value,
+              items: [
+                _bottomItemBar(
+                    Icons.home, 'Home', const Color.fromARGB(255, 4, 147, 114)),
+                _bottomItemBar(Icons.favorite, 'Favorites',
+                    const Color.fromARGB(255, 216, 6, 97)),
+                _bottomItemBar(Icons.person, 'Account', Colors.teal.shade900)
+                // _bottomItemBar(Icons.person, 'Account', Colors.pink)
               ],
-            )),
-        bottomNavigationBar: SizedBox(
-          height: 55,
-          child: SalomonBottomBar(
-            curve: Curves.bounceOut,
-            onTap: controller.changeCurrentIndexScreen,
-            currentIndex: controller.currentIndex.value,
-            items: [
-              _bottomItemBar(
-                  Icons.home, 'Home', const Color.fromARGB(255, 8, 167, 16)),
-              _bottomItemBar(Icons.favorite, 'Favorites',
-                  const Color.fromARGB(255, 216, 6, 97)),
-              _bottomItemBar(Icons.person, 'Account', Colors.teal.shade800)
-              // _bottomItemBar(Icons.person, 'Account', Colors.pink)
-            ],
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Get.toNamed(Routes.ADD_DATA);
-            },
-            child: const Icon(Icons.add)))));
+            ),
+          )
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Get.toNamed(Routes.ADD_DATA);
+      //   },
+      //   child: const Icon(Icons.add),
+      // ),
+      ),
+    );
   }
 }
 

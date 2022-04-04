@@ -9,12 +9,21 @@ class OverviewController extends GetxController {
   final _collectionRefs = FirebaseFirestore.instance.collection('Recipes');
   final auth = FirebaseAuth.instance;
   var currentIndex = 0.obs;
-  List<Recipes> listOfData = [];
+  Set<Recipes> listOfData = {};
+  List<Recipes> data1 = [];
 
   Color backGroundColor = Colors.black;
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> streamDataOnDb() {
-    final _snapshot = _collectionRefs.snapshots();
+  Future<QuerySnapshot> streamDataOnDb() async {
+    final _snapshot = await _collectionRefs.get();
+
+    for (var resultData in _snapshot.docs) {
+      Recipes userData = Recipes.fromJson(resultData.data());
+      if (!listOfData.contains(userData)) {
+        listOfData.add(userData);
+      }
+    }
+
     return _snapshot;
   }
 
@@ -43,22 +52,23 @@ class OverviewController extends GetxController {
 
   void showPopUp({required dynamic arguments, required String docId}) {
     Get.defaultDialog(
-        title: 'Pilih Menu',
-        middleText: 'Ingin Pindah ke Page mana ?',
-        actions: [
-          TextButton(
-              onPressed: () {
-                Get.back();
-                Get.toNamed(Routes.EDIT_DATA, arguments: arguments);
-              },
-              child: const Text("Edit Data")),
-          TextButton(
-              onPressed: () {
-                Get.back();
-                _collectionRefs.doc(docId).delete();
-              },
-              child: const Text("Delete Data"))
-        ]);
+      title: 'Pilih Menu',
+      middleText: 'Ingin Pindah ke Page mana ?',
+      actions: [
+        TextButton(
+            onPressed: () {
+              Get.back();
+              Get.toNamed(Routes.EDIT_DATA, arguments: arguments);
+            },
+            child: const Text("Edit Data")),
+        TextButton(
+            onPressed: () {
+              Get.back();
+              _collectionRefs.doc(docId).delete();
+            },
+            child: const Text("Delete Data"))
+      ],
+    );
   }
 
   Future<void> fetchAllData() async {
