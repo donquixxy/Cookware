@@ -12,135 +12,141 @@ class AddDataView extends GetView<AddDataController> {
     var controller = Get.put(AddDataController());
     var imagePickerController = Get.put(ImagePickerController());
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 4, 147, 114),
+        elevation: 0,
+        title: Text("Add Resep"),
+        centerTitle: true,
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           controller.addDataToFirebase(imagePickerController.image!);
         },
         child: const Icon(Icons.add),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Obx(
-              () => SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    imagePickerController.adaIsi.isTrue
-                        ? Image.file(
-                            imagePickerController.image!,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Obx(
+            () => SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  imagePickerController.adaIsi.isTrue
+                      ? Image.file(
+                          imagePickerController.image!,
+                          height: 150,
+                          width: 300,
+                          fit: BoxFit.fill,
+                        )
+                      : GestureDetector(
+                          onTap: () {
+                            imagePickerController.pickImageFrom();
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.all(15),
                             height: 150,
                             width: 300,
-                            fit: BoxFit.fill,
-                          )
-                        : GestureDetector(
-                            onTap: () {
-                              imagePickerController.pickImageFrom();
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              margin: const EdgeInsets.all(15),
-                              height: 150,
-                              width: 300,
-                              child: const Text(
-                                "Insert Image",
-                                textAlign: TextAlign.center,
-                              ),
-                              decoration: BoxDecoration(border: Border.all()),
+                            child: const Text(
+                              "Insert Image",
+                              textAlign: TextAlign.center,
                             ),
-                          ),
-                    Container(
-                      margin: const EdgeInsets.all(12),
-                      child: TextFormField(
-                        controller: controller.namaResepController,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 25, horizontal: 20),
-                            label: const Text("Nama Resep")),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(12),
-                      child: TextFormField(
-                        controller: controller.cookTimeController,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 25, horizontal: 20),
-                            label: const Text("Durasi Masak")),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(12),
-                      child: TextFormField(
-                        controller: controller.deskripsiController,
-                        minLines: 1,
-                        maxLines: null,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 25, horizontal: 20),
-                            label: const Text("Deskripsi")),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.all(12),
-                            child: TextFormField(
-                              controller: controller.chipWordController,
-                              maxLines: null,
-                              keyboardType: TextInputType.multiline,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20)),
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 25, horizontal: 20),
-                                  label: const Text("Bahan Baku")),
-                            ),
+                            decoration: BoxDecoration(border: Border.all()),
                           ),
                         ),
-                        TextButton(
-                            onPressed: () {
-                              controller.addDataToChip(
-                                  controller.chipWordController.text);
-                            },
-                            child: const Text("Add"))
-                      ],
+                  Container(
+                    margin: const EdgeInsets.all(12),
+                    child: TextFormField(
+                      controller: controller.namaResepController,
+                      keyboardType: TextInputType.multiline,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 25, horizontal: 20),
+                          label: const Text("Nama Resep")),
                     ),
-                    Obx((() => Expanded(
-                          child: GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 4,
-                                    crossAxisSpacing: 2,
-                                    mainAxisSpacing: 2),
-                            itemCount: controller.chipWord.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Chip(
-                                onDeleted: () {
-                                  controller.deleteDataChip(index);
-                                },
-                                backgroundColor: Colors.primaries[
-                                    Random().nextInt(Colors.primaries.length)],
-                                labelPadding: const EdgeInsets.all(4),
-                                label: Text(controller.chipWord[index]),
-                              );
-                            },
+                  ),
+                  Container(
+                    margin: const EdgeInsets.all(12),
+                    child: TextFormField(
+                      controller: controller.cookTimeController,
+                      keyboardType: TextInputType.multiline,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 25, horizontal: 20),
+                          label: const Text("Durasi Masak")),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.all(12),
+                    child: TextFormField(
+                      controller: controller.deskripsiController,
+                      minLines: 1,
+                      maxLines: null,
+                      keyboardType: TextInputType.multiline,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 25, horizontal: 20),
+                          label: const Text("Deskripsi")),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.all(12),
+                          child: TextFormField(
+                            controller: controller.chipWordController,
+                            maxLines: null,
+                            keyboardType: TextInputType.multiline,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 25, horizontal: 20),
+                                label: const Text("Bahan Baku")),
                           ),
-                        )))
-                  ],
-                ),
+                        ),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            controller.addDataToChip(
+                                controller.chipWordController.text);
+                          },
+                          child: const Text("Add"))
+                    ],
+                  ),
+                  Obx((() => Expanded(
+                        child: GridView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 4,
+                                  crossAxisSpacing: 2,
+                                  mainAxisSpacing: 2),
+                          itemCount: controller.chipWord.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Chip(
+                              onDeleted: () {
+                                controller.deleteDataChip(index);
+                              },
+                              backgroundColor: Colors.primaries[
+                                  Random().nextInt(Colors.primaries.length)],
+                              labelPadding: const EdgeInsets.all(4),
+                              label: Text(controller.chipWord[index]),
+                            );
+                          },
+                        ),
+                      )))
+                ],
               ),
             ),
           ),

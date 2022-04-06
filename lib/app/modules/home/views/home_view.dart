@@ -19,50 +19,17 @@ class HomeView extends GetView<HomeController> {
               backgroundColor: const Color.fromARGB(255, 4, 147, 114),
               elevation: 0,
               title: Container(
-                child: Row(children: const [
-                  Spacer(),
-                  Icon(Icons.restaurant_menu),
-                  Text("Cookware"),
-                  Spacer(),
-                ]),
+                child: Row(
+                  children: const [
+                    Spacer(),
+                    Icon(Icons.restaurant_menu),
+                    Text("Cookware"),
+                    Spacer(),
+                  ],
+                ),
               ),
               centerTitle: true,
             ),
-            // appBar: AppBar(
-            //   elevation: 0,
-            //   shape: const RoundedRectangleBorder(
-            //     borderRadius: BorderRadius.only(
-            //         bottomLeft: Radius.circular(40),
-            //         bottomRight: Radius.circular(40)),
-            //   ),
-            //   toolbarHeight: 180,
-            //   // flexibleSpace: Container(
-            //   //   decoration: const BoxDecoration(
-            //   //     borderRadius: BorderRadius.only(
-            //   //       bottomLeft: Radius.circular(40),
-            //   //       bottomRight: Radius.circular(40),
-            //   //     ),
-            //   //   ),
-            //   // ),
-            //   // backgroundColor: Colors.transparent,
-            //   title: Container(
-            //     child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       children: const [
-            //         Icon(
-            //           Icons.restaurant_menu,
-            //           color: Colors.white,
-            //         ),
-            //         Text(
-            //           'Cookware',
-            //           style: TextStyle(
-            //               color: Colors.white, fontWeight: FontWeight.bold),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            //   centerTitle: true,
-            // ),
             body: Obx(() => IndexedStack(
                   index: controller.currentIndex.value,
                   children: [
@@ -85,14 +52,7 @@ class HomeView extends GetView<HomeController> {
                 // _bottomItemBar(Icons.person, 'Account', Colors.pink)
               ],
             ),
-          )
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     Get.toNamed(Routes.ADD_DATA);
-      //   },
-      //   child: const Icon(Icons.add),
-      // ),
-      ),
+          )),
     );
   }
 }

@@ -40,9 +40,8 @@ class OverviewView extends GetView<OverviewController> {
                             //   children: [
                             //     IconButton(
                             //         onPressed: () {
-                            //           print(controller.listOfData.length);
-                            //           print('ok');
-                            //           print(controller.data1);
+                            //           print(controller.data1.length);
+                            //           // print('ok');
                             //         },
                             //         icon: const Icon(
                             //           Icons.menu,
@@ -85,7 +84,7 @@ class OverviewView extends GetView<OverviewController> {
                                   viewportFraction: 1,
                                   autoPlay: true,
                                 ),
-                                items: controller.listOfData
+                                items: controller.data1
                                     .map((data) => GestureDetector(
                                           onTap: () {
                                             Get.toNamed(Routes.DETAILSCREEN,
@@ -95,10 +94,6 @@ class OverviewView extends GetView<OverviewController> {
                                             alignment: Alignment.bottomCenter,
                                             children: [
                                               ClipRRect(
-                                                  // borderRadius: const BorderRadius.only(
-                                                  //   bottomLeft: Radius.circular(30),
-                                                  //   bottomRight: Radius.circular(30),
-                                                  // ),
                                                   child: ImageFiltered(
                                                 imageFilter: ImageFilter.blur(
                                                     sigmaX: 1, sigmaY: 2),
@@ -147,20 +142,6 @@ class OverviewView extends GetView<OverviewController> {
                             const SizedBox(
                               height: 30,
                             ),
-
-                            //TODO : CATEGORIES..
-                            // Container(
-                            //   height: 150,
-                            //   child: StreamBuilder(
-                            //     builder: (context, snapshot) {
-
-                            //       return ListView.builder(
-                            //         itemCount:  ,
-                            //         itemBuilder: ,
-                            //       )
-                            //     },
-                            //   )
-                            // ),
                             Padding(
                               padding: const EdgeInsets.only(left: 8, right: 8),
                               child: Container(

@@ -138,7 +138,10 @@ class BookmarkView extends GetView<BookmarkController> {
                               Column(
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      controller.deleteFromBookmark(docId,
+                                          controller.firebaseCurrentUser!.uid);
+                                    },
                                     icon: Icon(Icons.bookmark,
                                         color: Colors.green.shade500),
                                   ),

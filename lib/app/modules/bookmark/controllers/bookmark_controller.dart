@@ -35,4 +35,24 @@ class BookmarkController extends GetxController {
     print(isLiked.value);
     return !isLiked.value;
   }
+
+  void deleteFromBookmark(String docId, String currentUid) {
+    Get.defaultDialog(
+      title: 'Hapus Data',
+      middleText: 'Apakah anda ingin menghapus resep dari bookmark ?',
+      textConfirm: 'Ya',
+      textCancel: 'Tidak',
+      onConfirm: () {
+        firebaseFirestore
+            .collection('UserLiked')
+            .doc(currentUid)
+            .collection('LikedItems')
+            .doc(docId)
+            .delete();
+      },
+      onCancel: () {
+        Get.back();
+      },
+    );
+  }
 }

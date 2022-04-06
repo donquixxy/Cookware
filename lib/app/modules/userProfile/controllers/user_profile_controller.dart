@@ -21,18 +21,18 @@ class UserProfileController extends GetxController with StateMixin {
     return filter;
   }
 
-  @override
-  void onInit() {
-    currentUserListData(currentUid: userController.auth.currentUser!.uid);
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   currentUserListData(currentUid: userController.auth.currentUser!.uid);
+  //   super.onInit();
+  // }
 
-  void currentUserListData({required String currentUid}) {
-    var result = userController.listOfData
-        .where((element) => element.uidCreator == currentUid)
-        .map((e) => userData.add(e))
-        .toList();
-  }
+  // void currentUserListData({required String currentUid}) {
+  //   var result = userController.listOfData
+  //       .where((element) => element.uidCreator == currentUid)
+  //       .map((e) => userData.add(e))
+  //       .toList();
+  // }
 
   Future<void> fetchUserCollection({required String uid}) async {
     var data =
