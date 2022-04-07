@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_application_1/app/data/models/user_models.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';

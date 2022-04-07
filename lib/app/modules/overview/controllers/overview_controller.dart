@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/data/models/recipe_models.dart';
-import 'package:flutter_application_1/app/routes/app_pages.dart';
 import 'package:get/get.dart';
-import 'dart:math';
 
 class OverviewController extends GetxController {
   final _collectionRefs = FirebaseFirestore.instance.collection('Recipes');

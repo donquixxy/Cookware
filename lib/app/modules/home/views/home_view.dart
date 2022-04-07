@@ -35,7 +35,7 @@ class HomeView extends GetView<HomeController> {
                     onPressed: () {
                       userController.userLogout();
                     },
-                    icon: Icon(Icons.logout))
+                    icon: const Icon(Icons.logout))
               ],
               centerTitle: true,
             ),

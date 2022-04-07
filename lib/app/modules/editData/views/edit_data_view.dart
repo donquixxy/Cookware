@@ -19,7 +19,7 @@ class EditDataView extends GetView<EditDataController> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 4, 147, 114),
         elevation: 0,
-        title: Text("Edit Resep"),
+        title: const Text("Edit Resep"),
         centerTitle: true,
       ),
       body: FutureBuilder<DocumentSnapshot<Object>>(
@@ -112,7 +112,7 @@ class EditDataView extends GetView<EditDataController> {
                           ),
                           Obx(() => Expanded(
                                 child: GridView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(
