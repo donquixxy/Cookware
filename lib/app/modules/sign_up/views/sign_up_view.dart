@@ -15,7 +15,7 @@ class SignUpView extends GetView<SignUpController> {
       body: ListView(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 80),
+            margin: const EdgeInsets.only(top: 80),
             child: const FlutterLogo(
               size: 80,
             ),
@@ -48,7 +48,7 @@ class SignUpView extends GetView<SignUpController> {
             padding: const EdgeInsets.fromLTRB(18, 10, 18, 8),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  minimumSize: Size(50, 50),
+                  minimumSize: const Size(50, 50),
                   primary: const Color.fromARGB(255, 4, 147, 114)),
               onPressed: () async {
                 // print('clicked');

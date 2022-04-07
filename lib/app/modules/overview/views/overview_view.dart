@@ -94,15 +94,19 @@ class OverviewView extends GetView<OverviewController> {
                                             alignment: Alignment.bottomCenter,
                                             children: [
                                               ClipRRect(
-                                                  child: ImageFiltered(
-                                                imageFilter: ImageFilter.blur(
-                                                    sigmaX: 1, sigmaY: 2),
-                                                child: Image.network(
-                                                  data.imageUrl,
-                                                  fit: BoxFit.cover,
-                                                  width: double.infinity,
+                                                child: ImageFiltered(
+                                                  imageFilter: ImageFilter.blur(
+                                                      sigmaX: 1, sigmaY: 2),
+                                                  child:
+                                                      FadeInImage.assetNetwork(
+                                                    fit: BoxFit.cover,
+                                                    width: double.infinity,
+                                                    image: data.imageUrl,
+                                                    placeholder:
+                                                        'assets/placeholder.jpg',
+                                                  ),
                                                 ),
-                                              )),
+                                              ),
                                               Positioned(
                                                   child: Container(
                                                 decoration: const BoxDecoration(

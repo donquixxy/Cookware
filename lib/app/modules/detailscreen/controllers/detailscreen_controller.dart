@@ -8,6 +8,7 @@ class DetailscreenController extends GetxController {
   var firebaseAuth = FirebaseAuth.instance;
 
   Recipes resep = Get.arguments[0];
+  String documentId = Get.arguments[1];
 
   Future<void> addLikedIdToDB(
       {required String docId, required String currentUserId}) async {
