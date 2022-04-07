@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/controllers/users_controller_controller.dart';
 import 'package:flutter_application_1/app/modules/bookmark/views/bookmark_view.dart';
 import 'package:flutter_application_1/app/modules/overview/views/overview_view.dart';
 import 'package:flutter_application_1/app/modules/userProfile/views/user_profile_view.dart';
@@ -11,6 +12,7 @@ import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   final controller = Get.put(HomeController());
+  final userController = Get.find<UsersControllerController>();
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -28,6 +30,13 @@ class HomeView extends GetView<HomeController> {
                   ],
                 ),
               ),
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      userController.userLogout();
+                    },
+                    icon: Icon(Icons.logout))
+              ],
               centerTitle: true,
             ),
             body: Obx(() => IndexedStack(

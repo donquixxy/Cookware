@@ -13,6 +13,7 @@ abstract class Routes {
   static const DETAILSCREEN = _Paths.DETAILSCREEN;
   static const BOOKMARK = _Paths.BOOKMARK;
   static const USER_PROFILE = _Paths.USER_PROFILE;
+  static const SIGN_UP = _Paths.SIGN_UP;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const DETAILSCREEN = '/detailscreen';
   static const BOOKMARK = '/bookmark';
   static const USER_PROFILE = '/user-profile';
+  static const SIGN_UP = '/sign-up';
 }

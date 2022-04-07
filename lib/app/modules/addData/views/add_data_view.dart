@@ -15,7 +15,7 @@ class AddDataView extends GetView<AddDataController> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 4, 147, 114),
         elevation: 0,
-        title: Text("Add Resep"),
+        title: const Text("Add Resep"),
         centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(
@@ -125,7 +125,7 @@ class AddDataView extends GetView<AddDataController> {
                   ),
                   Obx((() => Expanded(
                         child: GridView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(

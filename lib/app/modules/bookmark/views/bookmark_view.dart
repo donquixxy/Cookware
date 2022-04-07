@@ -8,14 +8,10 @@ import 'package:get/get.dart';
 import '../controllers/bookmark_controller.dart';
 
 class BookmarkView extends GetView<BookmarkController> {
-  var controller = Get.put(BookmarkController());
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(BookmarkController());
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('BookmarkView'),
-      //   centerTitle: true,
-      // ),
       body: StreamBuilder<QuerySnapshot>(
         stream: controller.streamUserBookmarkData(
             currentuid: controller.firebaseCurrentUser!.uid),

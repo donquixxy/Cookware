@@ -1,12 +1,34 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1/app/data/models/user_models.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class UsersControllerController extends GetxController {
-  //TODO: Implement UsersControllerController
+  @override
+  void onClose() {
+    nameController.clear();
+    emailController.clear();
+    passwordController.clear();
+    super.onClose();
+  }
+
+  @override
+  void onInit() {
+    nameController.clear();
+    emailController.clear();
+    passwordController.clear();
+    super.onInit();
+  }
 
   final firebaseAuth = FirebaseAuth.instance;
   final googleSignIn = GoogleSignIn();
+  final firebaseFirestore = FirebaseFirestore.instance.collection('Users');
+
+  var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
 
   Stream<User?> streamUserLogin() {
     var status = firebaseAuth.authStateChanges();
@@ -16,5 +38,83 @@ class UsersControllerController extends GetxController {
   Future<void> userLogout() async {
     await firebaseAuth.signOut();
     await googleSignIn.signOut();
+  }
+
+  Future<UserCredential?> createEmailPassword() async {
+    try {
+      if (nameController.text.isEmpty &&
+          nameController.text.isEmpty &&
+          passwordController.text.isEmpty) {
+        Get.defaultDialog(
+          title: 'Error',
+          middleText: 'Kolom Tidak boleh kosong !',
+          textConfirm: 'Ok',
+          onConfirm: () {
+            Get.back();
+          },
+        );
+      }
+      var result = await firebaseAuth.createUserWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+
+      String uid = result.user!.uid;
+
+      await result.user!.updateDisplayName(nameController.text);
+      await result.user!.updatePhotoURL(
+          'https://www.pngitem.com/pimgs/m/99-998739_dale-engen-person-placeholder-hd-png-download.png');
+
+      UserModels newUser = UserModels(
+          email: emailController.text,
+          displayName: nameController.text,
+          uid: uid);
+
+      firebaseFirestore.doc(uid).set(newUser.toJson());
+
+      Get.defaultDialog(
+        title: 'Daftar Berhasil',
+        middleText:
+            'Akun telah berhasil didaftarkan !\n Akan dialihkan ke menu utama ',
+        barrierDismissible: false,
+        textConfirm: 'Ok',
+        onConfirm: () {
+          Get.back();
+          Get.back();
+        },
+      );
+
+      return result;
+    } on FirebaseAuthException catch (error) {
+      Get.defaultDialog(
+        barrierDismissible: false,
+        title: error.code,
+        middleText: error.message!,
+        textConfirm: 'Ok',
+        onConfirm: () {
+          Get.back();
+        },
+      );
+    }
+    return null;
+  }
+
+  Future<UserCredential?> loginWithEmailPassword() async {
+    try {
+      nameController.clear();
+      emailController.clear();
+      passwordController.clear();
+      var userResult = await firebaseAuth.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+      return userResult;
+    } on FirebaseException catch (error) {
+      Get.defaultDialog(
+        title: error.code,
+        middleText: error.message!,
+        textConfirm: 'Ok',
+        onConfirm: () {
+          Get.back();
+        },
+      );
+    }
+    return null;
   }
 }

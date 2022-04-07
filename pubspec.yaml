@@ -20,6 +20,7 @@ dependencies:
   salomon_bottom_bar: ^3.3.0
   carousel_slider: ^4.0.0
   google_fonts: ^2.3.1
+  material_design_icons_flutter: ^5.0.6595
 
 
 dev_dependencies: 

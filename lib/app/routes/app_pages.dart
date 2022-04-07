@@ -14,6 +14,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/overview/bindings/overview_binding.dart';
 import '../modules/overview/views/overview_view.dart';
+import '../modules/sign_up/bindings/sign_up_binding.dart';
+import '../modules/sign_up/views/sign_up_view.dart';
 import '../modules/userProfile/bindings/user_profile_binding.dart';
 import '../modules/userProfile/views/user_profile_view.dart';
 
@@ -64,6 +66,11 @@ class AppPages {
       name: _Paths.USER_PROFILE,
       page: () => UserProfileView(),
       binding: UserProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.SIGN_UP,
+      page: () => SignUpView(),
+      binding: SignUpBinding(),
     ),
   ];
 }
