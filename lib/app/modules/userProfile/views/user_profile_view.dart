@@ -157,10 +157,12 @@ class UserProfileView extends GetView<UserProfileController> {
                                   width: double.infinity,
                                 ),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 10, left: 8),
+                                  padding: const EdgeInsets.only(
+                                      top: 10, left: 8, right: 8),
                                   child: Text(
                                     resep.name,
+                                    overflow: TextOverflow.clip,
+                                    softWrap: false,
                                     style: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),

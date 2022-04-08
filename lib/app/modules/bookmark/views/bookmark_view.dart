@@ -87,50 +87,57 @@ class BookmarkView extends GetView<BookmarkController> {
                                 ),
                                 //End of Image Section
 
-                                Container(
-                                  padding:
-                                      const EdgeInsets.only(left: 20, top: 10),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              resepData.name,
-                                              style: const TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            const SizedBox(
-                                              width: 50,
-                                            ),
-                                          ],
+                                Expanded(
+                                  child: Container(
+                                    padding: const EdgeInsets.only(
+                                        left: 20, top: 10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                resepData.name,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.clip,
+                                                style: const TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                              const SizedBox(
+                                                width: 50,
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      Container(
-                                        padding: const EdgeInsets.only(top: 10),
-                                        child: Text(
-                                          "by ${resepData.recipeBy}",
-                                          style: const TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w300),
+                                        Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 10),
+                                          child: Text(
+                                            "by ${resepData.recipeBy}",
+                                            style: const TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300),
+                                          ),
                                         ),
-                                      ),
-                                      Container(
-                                        padding: const EdgeInsets.only(top: 10),
-                                        child: Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.timer,
-                                              size: 18,
-                                            ),
-                                            Text(resepData.cookTime)
-                                          ],
+                                        Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 10),
+                                          child: Row(
+                                            children: [
+                                              const Icon(
+                                                Icons.timer,
+                                                size: 18,
+                                              ),
+                                              Text(resepData.cookTime)
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 const Spacer(),
@@ -159,7 +166,9 @@ class BookmarkView extends GetView<BookmarkController> {
               ),
             );
           }
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );
