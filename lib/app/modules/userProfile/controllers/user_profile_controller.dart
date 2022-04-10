@@ -9,8 +9,8 @@ import 'package:get/get.dart';
 class UserProfileController extends GetxController with StateMixin {
   var firebaseAuth = FirebaseAuth.instance;
   var firebaseFirestore = FirebaseFirestore.instance.collection('Recipes');
-  Set<Recipes> userData = {};
-  Set<Recipes> filteredSet = {};
+  // Set<Recipes> userData = {};
+  // Set<Recipes> filteredSet = {};
   var userController = Get.find<OverviewController>();
 
   Stream<QuerySnapshot<Map<String, dynamic>>> userDataList(
@@ -21,14 +21,14 @@ class UserProfileController extends GetxController with StateMixin {
     return filter;
   }
 
-  Future<void> fetchUserCollection({required String uid}) async {
-    var data =
-        await firebaseFirestore.where('uidCreator', isEqualTo: uid).get();
+  // Future<void> fetchUserCollection({required String uid}) async {
+  //   var data =
+  //       await firebaseFirestore.where('uidCreator', isEqualTo: uid).get();
 
-    for (var result in data.docs) {
-      Recipes data = Recipes.fromJson(result.data());
-    }
-  }
+  //   for (var result in data.docs) {
+  //     Recipes data = Recipes.fromJson(result.data());
+  //   }
+  // }
 
   void showPopUp({required dynamic arguments, required String docId}) {
     Get.defaultDialog(
@@ -46,13 +46,14 @@ class UserProfileController extends GetxController with StateMixin {
               Get.back();
               firebaseFirestore.doc(docId).delete();
               Get.defaultDialog(
-                  title: 'Sukses',
-                  middleText: 'Data Berhasil Dihapus',
-                  textConfirm: 'Ok',
-                  onConfirm: () {
-                    Get.back();
-                    Get.back();
-                  });
+                title: 'Sukses',
+                middleText: 'Data Berhasil Dihapus',
+                textConfirm: 'Ok',
+                onConfirm: () {
+                  Get.back();
+                  Get.back();
+                },
+              );
             },
             child: const Text("Delete Data"))
       ],

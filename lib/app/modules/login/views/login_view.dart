@@ -22,34 +22,54 @@ class LoginView extends GetView<LoginController> {
             if (snapshot.data != null) {
               return HomeView();
             }
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            {
+              return Center(
+                child: CircularProgressIndicator.adaptive(),
+              );
+            }
           }
 
           return ListView(
             children: [
               Container(
                 margin: EdgeInsets.only(top: 80),
-                child: FlutterLogo(
+                child: const Icon(
+                  Icons.restaurant_menu_sharp,
                   size: 100,
+                  color: Color.fromARGB(255, 4, 147, 114),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Text(
-                  'Sign In',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                padding: const EdgeInsets.fromLTRB(26, 18, 22, 18),
+                child: Center(
+                  child: Text(
+                    'Sign In',
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87),
+                  ),
                 ),
               ),
-              textFieldBuilder('Email', usersController.emailController, false),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: textFieldBuilder('Email',
+                    usersController.emailController, false, Icons.email),
+              ),
               SizedBox(
                 height: 10,
               ),
-              textFieldBuilder(
-                  'Password', usersController.passwordController, true),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: textFieldBuilder('Password',
+                    usersController.passwordController, true, Icons.password),
+              ),
               SizedBox(
                 height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.all(18.0),
+                padding: const EdgeInsets.fromLTRB(26, 18, 26, 18),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       minimumSize: Size(50, 50),
@@ -76,17 +96,20 @@ class LoginView extends GetView<LoginController> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Get.toNamed(Routes.SIGN_UP, arguments: [
-                        usersController.emailController.clear(),
-                        usersController.passwordController.clear(),
-                      ]);
+                      Get.toNamed(
+                        Routes.SIGN_UP,
+                        arguments: [
+                          usersController.emailController.clear(),
+                          usersController.passwordController.clear(),
+                        ],
+                      );
                     },
                     child: Text("Click here to Sign Up"),
                   )
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(18, 8, 18, 0),
+                padding: const EdgeInsets.fromLTRB(26, 12, 26, 0),
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
                       minimumSize: Size(50, 50), primary: Colors.red.shade300),
@@ -108,19 +131,21 @@ class LoginView extends GetView<LoginController> {
   }
 }
 
-Widget textFieldBuilder(
-    String labelText, TextEditingController controller, bool isHidden) {
+Widget textFieldBuilder(String labelText, TextEditingController controller,
+    bool isHidden, IconData iconData) {
   // final usersController = Get.find<UsersControllerController>();
 
   return Padding(
     padding: const EdgeInsets.fromLTRB(18, 10, 18, 0),
     child: TextField(
+      style: TextStyle(color: Colors.black87),
       obscureText: isHidden,
       controller: controller,
       decoration: InputDecoration(
+        prefixIcon: Icon(iconData, color: Color.fromARGB(255, 4, 147, 114)),
         labelText: labelText,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(13),
         ),
       ),
     ),

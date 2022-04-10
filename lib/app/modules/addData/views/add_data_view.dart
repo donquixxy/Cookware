@@ -19,6 +19,7 @@ class AddDataView extends GetView<AddDataController> {
         centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(255, 4, 147, 114),
         onPressed: () {
           controller.addDataToFirebase(imagePickerController.image!);
         },
@@ -105,13 +106,15 @@ class AddDataView extends GetView<AddDataController> {
                           child: TextFormField(
                             controller: controller.chipWordController,
                             maxLines: null,
-                            keyboardType: TextInputType.multiline,
+                            onFieldSubmitted: controller.addDataToChip,
+                            textInputAction: TextInputAction.done,
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 25, horizontal: 20),
-                                label: const Text("Bahan Baku")),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 25, horizontal: 20),
+                              label: const Text("Bahan Baku"),
+                            ),
                           ),
                         ),
                       ),
