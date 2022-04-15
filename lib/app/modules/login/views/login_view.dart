@@ -7,6 +7,7 @@ import 'package:flutter_application_1/app/modules/home/views/home_view.dart';
 import 'package:flutter_application_1/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../controllers/login_controller.dart';
 
@@ -15,6 +16,18 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      //   centerTitle: true,
+      //   title: Text(
+      //     "Sign in",
+      //     style: TextStyle(
+      //         color: Colors.black,
+      //         fontFamily: GoogleFonts.inter().fontFamily,
+      //         fontWeight: FontWeight.w600),
+      //   ),
+      // ),
       body: StreamBuilder(
         stream: usersController.streamUserLogin(),
         builder: (context, snapshot) {
@@ -33,7 +46,7 @@ class LoginView extends GetView<LoginController> {
           return ListView(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 80),
+                margin: EdgeInsets.only(top: 50),
                 child: const Icon(
                   Icons.restaurant_menu_sharp,
                   size: 100,
@@ -42,13 +55,12 @@ class LoginView extends GetView<LoginController> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(26, 18, 22, 18),
-                child: Center(
-                  child: Text(
-                    'Sign In',
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87),
+                child: Text(
+                  'Sign in \nto your account',
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.inter().fontFamily,
+                    fontSize: 32,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -145,7 +157,7 @@ Widget textFieldBuilder(String labelText, TextEditingController controller,
         prefixIcon: Icon(iconData, color: Color.fromARGB(255, 4, 147, 114)),
         labelText: labelText,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(13),
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
     ),
