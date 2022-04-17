@@ -39,15 +39,17 @@ class HomeView extends GetView<HomeController> {
               ],
               centerTitle: true,
             ),
-            body: Obx(() => IndexedStack(
-                  index: controller.currentIndex.value,
-                  children: [
-                    OverviewView(),
-                    BookmarkView(),
-                    UserProfileView()
-                    // AddDataView(),
-                  ],
-                )),
+            body: Obx(
+              () => IndexedStack(
+                index: controller.currentIndex.value,
+                children: [
+                  OverviewView(),
+                  BookmarkView(),
+                  UserProfileView()
+                  // AddDataView(),
+                ],
+              ),
+            ),
             bottomNavigationBar: SalomonBottomBar(
               curve: Curves.bounceOut,
               onTap: controller.changeCurrentIndexScreen,
@@ -55,9 +57,8 @@ class HomeView extends GetView<HomeController> {
               items: [
                 _bottomItemBar(
                     Icons.home, 'Home', const Color.fromARGB(255, 4, 147, 114)),
-                _bottomItemBar(Icons.favorite, 'Favorites',
-                    const Color.fromARGB(255, 216, 6, 97)),
-                _bottomItemBar(Icons.person, 'Account', Colors.teal.shade900)
+                _bottomItemBar(Icons.favorite, 'Favorites', Colors.pink),
+                _bottomItemBar(Icons.person, 'Account', Colors.teal)
                 // _bottomItemBar(Icons.person, 'Account', Colors.pink)
               ],
             ),
