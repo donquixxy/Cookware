@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../controllers/add_data_controller.dart';
 import 'dart:math';
+import '../../../controllers/static_theme.dart';
 
 class AddDataView extends GetView<AddDataController> {
   @override
@@ -13,13 +14,13 @@ class AddDataView extends GetView<AddDataController> {
     var imagePickerController = Get.put(ImagePickerController());
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 4, 147, 114),
+        backgroundColor: greenColor,
         elevation: 0,
         title: const Text("Add Resep"),
         centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 4, 147, 114),
+        backgroundColor: greenColor,
         onPressed: () {
           controller.addDataToFirebase(imagePickerController.image!);
         },

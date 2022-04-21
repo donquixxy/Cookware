@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/controllers/static_theme.dart';
 import 'package:flutter_application_1/app/data/models/recipe_models.dart';
 
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class EditDataView extends GetView<EditDataController> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 4, 147, 114),
+        backgroundColor: greenColor,
         elevation: 0,
         title: const Text("Edit Resep"),
         centerTitle: true,
@@ -157,7 +158,7 @@ class EditDataView extends GetView<EditDataController> {
       //   );
       // }),
       floatingActionButton: FloatingActionButton(
-          backgroundColor: Color.fromARGB(255, 4, 147, 114),
+          backgroundColor: greenColor,
           onPressed: () {
             controller.updateDataOnDb(
                 documentId, controller.firebaseAuth.currentUser!.uid);

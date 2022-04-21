@@ -47,10 +47,10 @@ class LoginView extends GetView<LoginController> {
             children: [
               Container(
                 margin: EdgeInsets.only(top: 50),
-                child: const Icon(
+                child: Icon(
                   Icons.restaurant_menu_sharp,
                   size: 100,
-                  color: Color.fromARGB(255, 4, 147, 114),
+                  color: greenColor,
                 ),
               ),
               Padding(
@@ -84,15 +84,14 @@ class LoginView extends GetView<LoginController> {
                 padding: const EdgeInsets.fromLTRB(26, 18, 26, 18),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      minimumSize: Size(50, 50),
-                      primary: const Color.fromARGB(255, 4, 147, 114)),
+                      minimumSize: Size(50, 50), primary: greenColor),
                   onPressed: () {
                     usersController.loginWithEmailPassword();
                     // print('clicked');
                   },
                   child: Text(
                     "SIGN IN",
-                    style: StaticTheme.textStyle,
+                    style: textStyle,
                   ),
                 ),
               ),
@@ -131,7 +130,7 @@ class LoginView extends GetView<LoginController> {
                   icon: Icon(MdiIcons.google),
                   label: Text(
                     "SIGN IN WITH GOOGLE",
-                    style: StaticTheme.textStyle,
+                    style: textStyle,
                   ),
                 ),
               )
@@ -154,7 +153,7 @@ Widget textFieldBuilder(String labelText, TextEditingController controller,
       obscureText: isHidden,
       controller: controller,
       decoration: InputDecoration(
-        prefixIcon: Icon(iconData, color: Color.fromARGB(255, 4, 147, 114)),
+        prefixIcon: Icon(iconData, color: greenColor),
         labelText: labelText,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

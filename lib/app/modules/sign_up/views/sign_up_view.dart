@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/controllers/static_theme.dart';
 import 'package:flutter_application_1/app/controllers/users_controller_controller.dart';
@@ -35,10 +33,10 @@ class SignUpView extends GetView<SignUpController> {
           children: [
             Container(
               margin: const EdgeInsets.only(top: 50),
-              child: const Icon(
+              child: Icon(
                 Icons.restaurant_menu_sharp,
                 size: 100,
-                color: Color.fromARGB(255, 4, 147, 114),
+                color: greenColor,
               ),
             ),
             const SizedBox(
@@ -48,7 +46,7 @@ class SignUpView extends GetView<SignUpController> {
               padding: const EdgeInsets.fromLTRB(26, 18, 26, 10),
               child: Text(
                 'Create an \naccount',
-                style: StaticTheme.textStyle.copyWith(
+                style: textStyle.copyWith(
                   fontFamily: GoogleFonts.inter().fontFamily,
                   fontSize: 32,
                   color: Colors.black87,
@@ -83,15 +81,14 @@ class SignUpView extends GetView<SignUpController> {
               padding: const EdgeInsets.fromLTRB(26, 10, 26, 8),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(50, 50),
-                    primary: const Color.fromARGB(255, 4, 147, 114)),
+                    minimumSize: const Size(50, 50), primary: greenColor),
                 onPressed: () async {
                   // print('clicked');
                   await usersController.createEmailPassword();
                 },
                 child: Text(
                   "SIGN UP",
-                  style: StaticTheme.textStyle,
+                  style: textStyle,
                 ),
               ),
             ),
