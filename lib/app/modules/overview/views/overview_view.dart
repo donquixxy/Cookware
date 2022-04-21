@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/controllers/static_theme.dart';
 import 'package:flutter_application_1/app/controllers/users_controller_controller.dart';
 import 'package:flutter_application_1/app/data/models/recipe_models.dart';
 import 'package:flutter_application_1/app/routes/app_pages.dart';
@@ -16,9 +17,9 @@ class OverviewView extends GetView<OverviewController> {
   final usersController = Get.put(UsersControllerController());
   @override
   Widget build(BuildContext context) {
-    var foreGroundColor = controller.backGroundColor.computeLuminance() > 0.6
-        ? Colors.black87
-        : Colors.white70;
+    // var foreGroundColor = controller.backGroundColor.computeLuminance() > 0.6
+    //     ? Colors.black87
+    //     : Colors.white70;
 
     return SafeArea(
       child: Scaffold(
@@ -36,19 +37,6 @@ class OverviewView extends GetView<OverviewController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          // Row(
-                          //   children: [
-                          //     IconButton(
-                          //         onPressed: () {
-                          //           print(controller.data1.length);
-                          //           // print('ok');
-                          //         },
-                          //         icon: const Icon(
-                          //           Icons.menu,
-                          //           color: Colors.black,
-                          //         ))
-                          //   ],
-                          // ),
                           const SizedBox(
                             height: 10,
                           ),
@@ -155,7 +143,7 @@ class OverviewView extends GetView<OverviewController> {
                                     decoration: const BoxDecoration(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(10)),
-                                      color: Color.fromARGB(255, 4, 147, 114),
+                                      color: greenColor,
                                     ),
                                     child: const Center(
                                       child: Text(
@@ -174,7 +162,7 @@ class OverviewView extends GetView<OverviewController> {
                                     child: Divider(
                                       height: 20,
                                       thickness: 3,
-                                      color: Color.fromARGB(255, 4, 147, 114),
+                                      color: greenColor,
                                     ),
                                   )
                                 ],

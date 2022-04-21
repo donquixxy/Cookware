@@ -28,5 +28,14 @@ class DetailscreenController extends GetxController {
         uidCreator: resep.uidCreator);
 
     collectionRefs.set(_addedResep.toJson());
+
+    Get.defaultDialog(
+      title: 'Sukses',
+      middleText: 'Berhasil menambahkan ke favorit',
+      textConfirm: 'OK',
+      onConfirm: () {
+        Get.back();
+      },
+    );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/controllers/static_theme.dart';
 import 'package:flutter_application_1/app/data/models/recipe_models.dart';
 import 'package:flutter_application_1/app/routes/app_pages.dart';
 
@@ -30,7 +31,7 @@ class BookmarkView extends GetView<BookmarkController> {
                           width: 100,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Color.fromARGB(255, 4, 147, 114),
+                            color: greenColor,
                           ),
                           child: const Center(
                             child: Text(
@@ -49,7 +50,7 @@ class BookmarkView extends GetView<BookmarkController> {
                           child: Divider(
                             height: 20,
                             thickness: 3,
-                            color: Color.fromARGB(255, 4, 147, 114),
+                            color: greenColor,
                           ),
                         ),
                       ],
@@ -129,8 +130,9 @@ class BookmarkView extends GetView<BookmarkController> {
                                           child: Row(
                                             children: [
                                               const Icon(
-                                                Icons.timer,
+                                                Icons.timer_sharp,
                                                 size: 18,
+                                                color: greenColor,
                                               ),
                                               Text(resepData.cookTime)
                                             ],
@@ -150,8 +152,8 @@ class BookmarkView extends GetView<BookmarkController> {
                                             controller
                                                 .firebaseCurrentUser!.uid);
                                       },
-                                      icon: Icon(Icons.bookmark,
-                                          color: Colors.green.shade500),
+                                      icon: const Icon(Icons.bookmark,
+                                          color: greenColor),
                                     ),
                                   ],
                                 )

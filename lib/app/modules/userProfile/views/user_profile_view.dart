@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/controllers/static_theme.dart';
 import 'package:flutter_application_1/app/controllers/users_controller_controller.dart';
 import 'package:flutter_application_1/app/data/models/recipe_models.dart';
 import 'package:flutter_application_1/app/routes/app_pages.dart';
@@ -16,7 +17,7 @@ class UserProfileView extends GetView<UserProfileController> {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
-          backgroundColor: const Color.fromARGB(255, 4, 147, 114),
+          backgroundColor: greenColor,
           onPressed: () {
             Get.toNamed(Routes.ADD_DATA);
           },
@@ -53,31 +54,6 @@ class UserProfileView extends GetView<UserProfileController> {
                                 '',
                             style: const TextStyle(fontSize: 18),
                           ),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   crossAxisAlignment: CrossAxisAlignment.center,
-                          //   children: [
-                          //     Container(
-                          //       child: Column(
-                          //         children: const [
-                          //           Text("100"),
-                          //           Text("Total Posts")
-                          //         ],
-                          //       ),
-                          //     ),
-                          //     const SizedBox(
-                          //       width: 30,
-                          //     ),
-                          //     Container(
-                          //       child: Column(
-                          //         children: const [
-                          //           Text("200"),
-                          //           Text("Total Favorites")
-                          //         ],
-                          //       ),
-                          //     )
-                          //   ],
-                          // ),
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Row(
@@ -88,7 +64,7 @@ class UserProfileView extends GetView<UserProfileController> {
                                   decoration: const BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10)),
-                                    color: Color.fromARGB(255, 4, 147, 114),
+                                    color: greenColor,
                                   ),
                                   child: const Center(
                                     child: Text(
@@ -107,7 +83,7 @@ class UserProfileView extends GetView<UserProfileController> {
                                   child: Divider(
                                     height: 20,
                                     thickness: 3,
-                                    color: Color.fromARGB(255, 4, 147, 114),
+                                    color: greenColor,
                                   ),
                                 )
                               ],
