@@ -28,121 +28,121 @@ class EditDataView extends GetView<EditDataController> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return SafeArea(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.network(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
                           resep.imageUrl,
-                          height: 150,
-                          width: 300,
+                          height: 200,
                           fit: BoxFit.fill,
                         ),
-                        Container(
-                          margin: const EdgeInsets.all(12),
-                          child: TextFormField(
-                            controller: controller.namaResepController,
-                            keyboardType: TextInputType.multiline,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 25, horizontal: 20),
-                                label: const Text("Nama Resep")),
-                          ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.all(12),
+                        child: TextFormField(
+                          controller: controller.namaResepController,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 25, horizontal: 20),
+                              label: const Text("Nama Resep")),
                         ),
-                        Container(
-                          margin: const EdgeInsets.all(12),
-                          child: TextFormField(
-                            controller: controller.cookTimeController,
-                            keyboardType: TextInputType.multiline,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 25, horizontal: 20),
-                                label: const Text("Durasi Masak")),
-                          ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.all(12),
+                        child: TextFormField(
+                          controller: controller.cookTimeController,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 25, horizontal: 20),
+                              label: const Text("Durasi Masak")),
                         ),
-                        Container(
-                          margin: const EdgeInsets.all(12),
-                          child: TextFormField(
-                            controller: controller.deskripsiController,
-                            minLines: 1,
-                            maxLines: null,
-                            keyboardType: TextInputType.multiline,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 25, horizontal: 20),
-                                label: const Text("Deskripsi")),
-                          ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.all(12),
+                        child: TextFormField(
+                          controller: controller.deskripsiController,
+                          minLines: 1,
+                          maxLines: null,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 25, horizontal: 20),
+                              label: const Text("Deskripsi")),
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                margin: const EdgeInsets.all(12),
-                                child: TextFormField(
-                                  controller: controller.chipWordController,
-                                  maxLines: null,
-                                  textInputAction: TextInputAction.done,
-                                  onFieldSubmitted: controller.addDataToChip,
-                                  decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 25, horizontal: 20),
-                                      label: const Text("Bahan Baku")),
-                                ),
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(12),
+                              child: TextFormField(
+                                controller: controller.chipWordController,
+                                maxLines: null,
+                                textInputAction: TextInputAction.done,
+                                onFieldSubmitted: controller.addDataToChip,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        vertical: 25, horizontal: 20),
+                                    label: const Text("Bahan Baku")),
                               ),
                             ),
-                            TextButton(
-                                onPressed: () {
-                                  controller.addDataToChip(
-                                      controller.chipWordController.text);
-                                },
-                                child: const Text("Add"))
-                          ],
-                        ),
-                        Obx(
-                          () => Expanded(
-                            child: GridView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 4,
-                                      crossAxisSpacing: 2,
-                                      mainAxisSpacing: 2),
-                              itemCount:
-                                  controller.resep.value.listIngredients.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Chip(
-                                  onDeleted: () {
-                                    print(index);
-                                    controller.deleteDataChip(index);
-                                    print(index);
-                                  },
-                                  backgroundColor: Colors.primaries[Random()
-                                      .nextInt(Colors.primaries.length)],
-                                  labelPadding: const EdgeInsets.all(4),
-                                  label: Text(controller
-                                      .resep.value.listIngredients[index]),
-                                );
-                              },
-                            ),
                           ),
-                        )
-                      ],
-                    ),
+                          TextButton(
+                              onPressed: () {
+                                controller.addDataToChip(
+                                    controller.chipWordController.text);
+                              },
+                              child: const Text("Add"))
+                        ],
+                      ),
+                      Obx(
+                        () => GridView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 4,
+                                  crossAxisSpacing: 2,
+                                  mainAxisSpacing: 2),
+                          itemCount:
+                              controller.resep.value.listIngredients.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Chip(
+                              onDeleted: () {
+                                print(index);
+                                controller.deleteDataChip(index);
+                                print(index);
+                              },
+                              backgroundColor: Colors.primaries[
+                                  Random().nextInt(Colors.primaries.length)],
+                              labelPadding: const EdgeInsets.all(4),
+                              label: Text(controller
+                                  .resep.value.listIngredients[index]),
+                            );
+                          },
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),

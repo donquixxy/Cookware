@@ -29,6 +29,8 @@ class OverviewView extends GetView<OverviewController> {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
                 return SingleChildScrollView(
+                  // Header Section
+
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
@@ -58,6 +60,10 @@ class OverviewView extends GetView<OverviewController> {
                               style: TextStyle(color: Colors.grey.shade400),
                             ),
                           ),
+
+                          //End Of Header Section
+
+                          // Slider Section
                           Container(
                             height: Get.size.height * 0.25,
                             width: double.infinity,
@@ -129,6 +135,9 @@ class OverviewView extends GetView<OverviewController> {
                                   .toList(),
                             ),
                           ),
+
+                          // End Of Slider
+
                           const SizedBox(
                             height: 30,
                           ),
@@ -177,10 +186,12 @@ class OverviewView extends GetView<OverviewController> {
                               left: 10,
                               right: 10,
                             ),
+
+                            // Body Section
+
                             child: GridView.builder(
                               physics: const BouncingScrollPhysics(),
                               shrinkWrap: true,
-                              // scrollDirection: Axis.horizontal,
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                       mainAxisExtent: 280,
@@ -269,6 +280,7 @@ class OverviewView extends GetView<OverviewController> {
                                 );
                               },
                             ),
+                            // End Of Body section
                           )
                         ],
                       ),

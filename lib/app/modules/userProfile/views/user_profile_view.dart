@@ -123,29 +123,66 @@ class UserProfileView extends GetView<UserProfileController> {
                             padding: const EdgeInsets.only(
                                 left: 10, top: 8, right: 10),
                             child: Card(
-                                child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.network(
-                                  resep.imageUrl,
-                                  fit: BoxFit.cover,
-                                  height: 150,
-                                  width: double.infinity,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10, left: 8, right: 8),
-                                  child: Text(
-                                    resep.name,
-                                    overflow: TextOverflow.clip,
-                                    softWrap: false,
-                                    style: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.network(
+                                      resep.imageUrl,
+                                      fit: BoxFit.cover,
+                                      height: 150,
+                                      width: double.infinity,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            )),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 10, left: 8, right: 8),
+                                        child: Text(
+                                          resep.name,
+                                          overflow: TextOverflow.clip,
+                                          softWrap: false,
+                                          style: const TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Row(
+                                          children: [
+                                            IconButton(
+                                              onPressed: () {
+                                                Get.toNamed(Routes.EDIT_DATA,
+                                                    arguments: [resep, docId]);
+                                              },
+                                              icon: Icon(
+                                                Icons.edit,
+                                                color: greenColor,
+                                              ),
+                                            ),
+                                            IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                Icons.delete,
+                                                color: Colors.red.shade700,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
                           ),
                         );
                       },

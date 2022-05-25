@@ -43,10 +43,10 @@ class AddDataController extends GetxController with StateMixin {
   Future<void> addDataToFirebase(File file) async {
     var storageRefs = firebaseStorage.ref().child('Images/Recipes');
     var collectionRefs = firebaseFirestore.collection('Recipes');
-    if (chipWord.isNotEmpty ||
-        namaResepController.text.isNotEmpty ||
-        deskripsiController.text.isNotEmpty ||
-        cookTimeController.text.isNotEmpty ||
+    if (chipWord.isNotEmpty &&
+        namaResepController.text.isNotEmpty &&
+        deskripsiController.text.isNotEmpty &&
+        cookTimeController.text.isNotEmpty &&
         imageUrlController.text.isNotEmpty) {
       try {
         isLoading.toggle();
