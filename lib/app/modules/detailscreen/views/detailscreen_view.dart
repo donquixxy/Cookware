@@ -49,6 +49,9 @@ class DetailscreenView extends GetView<DetailscreenController> {
                     icon: const Icon(Icons.arrow_back)),
                 IconButton(
                   onPressed: () {
+                    print(documentId);
+                    print(controller.firebaseAuth.currentUser);
+                    print('clicked');
                     controller.addLikedIdToDB(
                         docId: documentId,
                         currentUserId:

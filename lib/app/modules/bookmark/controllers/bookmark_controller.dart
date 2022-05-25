@@ -43,6 +43,7 @@ class BookmarkController extends GetxController {
       textConfirm: 'Ya',
       textCancel: 'Tidak',
       onConfirm: () {
+        Get.back();
         firebaseFirestore
             .collection('UserLiked')
             .doc(currentUid)

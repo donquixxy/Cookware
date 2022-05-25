@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/controllers/static_theme.dart';
 import 'package:flutter_application_1/app/controllers/users_controller_controller.dart';
 import 'package:flutter_application_1/app/modules/bookmark/views/bookmark_view.dart';
 import 'package:flutter_application_1/app/modules/overview/views/overview_view.dart';
 import 'package:flutter_application_1/app/modules/userProfile/views/user_profile_view.dart';
-import 'package:flutter_application_1/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -18,7 +18,7 @@ class HomeView extends GetView<HomeController> {
     return Obx(
       (() => Scaffold(
             appBar: AppBar(
-              backgroundColor: const Color.fromARGB(255, 4, 147, 114),
+              backgroundColor: greenColor,
               elevation: 0,
               title: Container(
                 child: Row(
@@ -35,29 +35,29 @@ class HomeView extends GetView<HomeController> {
                     onPressed: () {
                       userController.userLogout();
                     },
-                    icon: Icon(Icons.logout))
+                    icon: const Icon(Icons.logout))
               ],
               centerTitle: true,
             ),
-            body: Obx(() => IndexedStack(
-                  index: controller.currentIndex.value,
-                  children: [
-                    OverviewView(),
-                    BookmarkView(),
-                    UserProfileView()
-                    // AddDataView(),
-                  ],
-                )),
+            body: Obx(
+              () => IndexedStack(
+                index: controller.currentIndex.value,
+                children: [
+                  OverviewView(),
+                  BookmarkView(),
+                  UserProfileView()
+                  // AddDataView(),
+                ],
+              ),
+            ),
             bottomNavigationBar: SalomonBottomBar(
               curve: Curves.bounceOut,
               onTap: controller.changeCurrentIndexScreen,
               currentIndex: controller.currentIndex.value,
               items: [
-                _bottomItemBar(
-                    Icons.home, 'Home', const Color.fromARGB(255, 4, 147, 114)),
-                _bottomItemBar(Icons.favorite, 'Favorites',
-                    const Color.fromARGB(255, 216, 6, 97)),
-                _bottomItemBar(Icons.person, 'Account', Colors.teal.shade900)
+                _bottomItemBar(Icons.home, 'Home', greenColor),
+                _bottomItemBar(Icons.favorite, 'Favorites', Colors.pink),
+                _bottomItemBar(Icons.person, 'Account', Colors.teal)
                 // _bottomItemBar(Icons.person, 'Account', Colors.pink)
               ],
             ),
