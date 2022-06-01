@@ -37,13 +37,10 @@ class EditDataView extends GetView<EditDataController> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          resep.imageUrl,
-                          height: 200,
-                          fit: BoxFit.fill,
-                        ),
+                        child: Image.network(resep.imageUrl,
+                            height: 200, fit: BoxFit.fill),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Container(
