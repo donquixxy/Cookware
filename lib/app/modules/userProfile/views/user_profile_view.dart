@@ -32,117 +32,170 @@ class UserProfileView extends GetView<UserProfileController> {
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
-                return ListView(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.transparent,
-                            maxRadius: 60,
-                            backgroundImage: NetworkImage(
-                              userController
-                                      .firebaseAuth.currentUser!.photoURL ??
-                                  '',
-                            ),
-                          ),
-                          Text(
-                            userController
-                                    .firebaseAuth.currentUser!.displayName ??
-                                '',
-                            style: const TextStyle(fontSize: 18),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 30,
-                                  width: 100,
-                                  decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: greenColor,
-                                  ),
-                                  child: const Center(
-                                    child: Text(
-                                      "Your Post",
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Expanded(
-                                  child: Divider(
-                                    height: 20,
-                                    thickness: 3,
-                                    color: greenColor,
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisExtent: 250,
-                        crossAxisSpacing: 5,
-                        mainAxisSpacing: 6,
-                        crossAxisCount: 2,
-                      ),
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        var _snapshotData = snapshot.data!.docs[index].data()
-                            as Map<String, dynamic>;
-                        String docId = snapshot.data!.docs[index].id;
-                        Recipes resep = Recipes.fromJson(_snapshotData);
-                        // print(_snapshotData);
-
-                        return GestureDetector(
-                          onTap: () {
-                            Get.toNamed(Routes.DETAILSCREEN,
-                                arguments: [resep, docId]);
-                          },
-                          onLongPress: () {
-                            controller.showPopUp(
-                                arguments: [resep, docId], docId: docId);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.only(
-                                left: 10, top: 8, right: 10),
-                            child: Card(
-                              shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
+                return LayoutBuilder(builder: (context, Constraints) {
+                  return ListView(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              maxRadius: 60,
+                              backgroundImage: NetworkImage(
+                                userController
+                                        .firebaseAuth.currentUser!.photoURL ??
+                                    '',
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                            ),
+                            Text(
+                              userController
+                                      .firebaseAuth.currentUser!.displayName ??
+                                  '',
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
                                 children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.network(
-                                      resep.imageUrl,
-                                      fit: BoxFit.cover,
-                                      height: 150,
-                                      width: double.infinity,
+                                  Container(
+                                    height: 30,
+                                    width: 100,
+                                    decoration: const BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      color: greenColor,
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        "Your Post",
+                                        style: TextStyle(
+                                            fontSize: 17,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  const Expanded(
+                                    child: Divider(
+                                      height: 20,
+                                      thickness: 3,
+                                      color: greenColor,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          mainAxisExtent: 250,
+                          crossAxisSpacing: 5,
+                          mainAxisSpacing: 6,
+                          crossAxisCount: 2,
+                        ),
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var _snapshotData = snapshot.data!.docs[index].data()
+                              as Map<String, dynamic>;
+                          String docId = snapshot.data!.docs[index].id;
+                          Recipes resep = Recipes.fromJson(_snapshotData);
+                          // print(_snapshotData);
+
+                          return GestureDetector(
+                            onTap: () {
+                              Get.toNamed(Routes.DETAILSCREEN,
+                                  arguments: [resep, docId]);
+                            },
+                            onLongPress: () {
+                              controller.showPopUp(
+                                  arguments: [resep, docId], docId: docId);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.only(
+                                  left: 10, top: 8, right: 10),
+                              child: Card(
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(10),
+                                      topLeft: Radius.circular(10)),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.network(
+                                            resep.imageUrl,
+                                            fit: BoxFit.cover,
+                                            height: 150,
+                                            width: double.infinity,
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment: Alignment.topRight,
+                                          child: PopupMenuButton(
+                                            enableFeedback: true,
+                                            onCanceled: () {
+                                              Get.back();
+                                            },
+                                            icon: const Icon(
+                                              Icons.more_vert,
+                                              color: Colors.white70,
+                                            ),
+                                            itemBuilder: (context) => [
+                                              PopupMenuItem(
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Get.toNamed(
+                                                      Routes.EDIT_DATA,
+                                                      arguments: [resep, docId],
+                                                    );
+                                                  },
+                                                  child: Container(
+                                                    child: Row(
+                                                      children: const [
+                                                        Icon(Icons.edit),
+                                                        Text("Edit")
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              PopupMenuItem(
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    controller.deleteRecipe(
+                                                        docId: docId);
+                                                  },
+                                                  child: Container(
+                                                    child: Row(
+                                                      children: const [
+                                                        Icon(Icons.delete),
+                                                        Text("Delete")
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Row(children: [
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             top: 10, left: 8, right: 8),
@@ -151,44 +204,49 @@ class UserProfileView extends GetView<UserProfileController> {
                                           overflow: TextOverflow.clip,
                                           softWrap: false,
                                           style: const TextStyle(
-                                              fontSize: 15,
+                                              fontSize: 17,
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ),
-                                      Container(
-                                        child: Row(
-                                          children: [
-                                            IconButton(
-                                              onPressed: () {
-                                                Get.toNamed(Routes.EDIT_DATA,
-                                                    arguments: [resep, docId]);
-                                              },
-                                              icon: Icon(
-                                                Icons.edit,
-                                                color: greenColor,
-                                              ),
-                                            ),
-                                            IconButton(
-                                              onPressed: () {},
-                                              icon: Icon(
-                                                Icons.delete,
-                                                color: Colors.red.shade700,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
+                                    ])
+                                    //     Container(
+                                    //       child: Row(
+                                    //         children: [
+                                    //           IconButton(
+                                    //             onPressed: () {
+                                    //               Get.toNamed(Routes.EDIT_DATA,
+                                    //                   arguments: [
+                                    //                     resep,
+                                    //                     docId
+                                    //                   ]);
+                                    //             },
+                                    //             icon: const Icon(
+                                    //               Icons.edit,
+                                    //               color: greenColor,
+                                    //             ),
+                                    //           ),
+                                    //           IconButton(
+                                    //             onPressed: () {},
+                                    //             icon: Icon(
+                                    //               Icons.delete,
+                                    //               color: Colors.red.shade700,
+                                    //             ),
+                                    //           ),
+                                    //         ],
+                                    //       ),
+                                    //     )
+                                    //   ],
+                                    // )
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                );
+                          );
+                        },
+                      ),
+                    ],
+                  );
+                });
               }
             }
             return const Center(

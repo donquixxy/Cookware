@@ -33,7 +33,7 @@ class SignUpView extends GetView<SignUpController> {
           children: [
             Container(
               margin: const EdgeInsets.only(top: 50),
-              child: Icon(
+              child: const Icon(
                 Icons.restaurant_menu_sharp,
                 size: 100,
                 color: greenColor,

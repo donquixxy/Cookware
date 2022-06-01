@@ -20,6 +20,17 @@ class UserProfileController extends GetxController with StateMixin {
     return filter;
   }
 
+  void deleteRecipe({required String docId}) {
+    Get.defaultDialog(
+        middleText: 'Ingin Menghapus Resep ?',
+        textConfirm: 'Ya',
+        textCancel: 'Tidak',
+        onConfirm: () {
+          firebaseFirestore.doc(docId).delete();
+          Get.back();
+        });
+  }
+
   void showPopUp({required dynamic arguments, required String docId}) {
     Get.defaultDialog(
       title: 'Pilih Menu',

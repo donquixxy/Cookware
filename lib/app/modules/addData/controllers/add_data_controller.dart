@@ -46,8 +46,7 @@ class AddDataController extends GetxController with StateMixin {
     if (chipWord.isNotEmpty &&
         namaResepController.text.isNotEmpty &&
         deskripsiController.text.isNotEmpty &&
-        cookTimeController.text.isNotEmpty &&
-        imageUrlController.text.isNotEmpty) {
+        cookTimeController.text.isNotEmpty) {
       try {
         isLoading.toggle();
         final filename = basename(file.path);

@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/addData/bindings/add_data_binding.dart';
 import '../modules/addData/views/add_data_view.dart';
+import '../modules/adminPanel/bindings/admin_panel_binding.dart';
+import '../modules/adminPanel/views/admin_panel_view.dart';
 import '../modules/bookmark/bindings/bookmark_binding.dart';
 import '../modules/bookmark/views/bookmark_view.dart';
 import '../modules/detailscreen/bindings/detailscreen_binding.dart';
@@ -71,6 +73,11 @@ class AppPages {
       name: _Paths.SIGN_UP,
       page: () => SignUpView(),
       binding: SignUpBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_PANEL,
+      page: () => AdminPanelView(),
+      binding: AdminPanelBinding(),
     ),
   ];
 }

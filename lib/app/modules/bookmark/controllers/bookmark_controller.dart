@@ -18,23 +18,23 @@ class BookmarkController extends GetxController {
     return collectionRefs;
   }
 
-  Future<bool> isInBookMarkCollection(
-      {required String docId, required String currentuId}) async {
-    var data = await firebaseFirestore
-        .collection('UserLiked')
-        .doc(currentuId)
-        .collection('LikedItems')
-        .doc(docId)
-        .get();
+  // Future<bool> isInBookMarkCollection(
+  //     {required String docId, required String currentuId}) async {
+  //   var data = await firebaseFirestore
+  //       .collection('UserLiked')
+  //       .doc(currentuId)
+  //       .collection('LikedItems')
+  //       .doc(docId)
+  //       .get();
 
-    if (data.exists) {
-      isLiked.value = true;
-      print(isLiked.value);
-      return isLiked.value;
-    }
-    print(isLiked.value);
-    return !isLiked.value;
-  }
+  //   if (data.exists) {
+  //     isLiked.value = true;
+  //     print(isLiked.value);
+  //     return isLiked.value;
+  //   }
+  //   print(isLiked.value);
+  //   return !isLiked.value;
+  // }
 
   void deleteFromBookmark(String docId, String currentUid) {
     Get.defaultDialog(

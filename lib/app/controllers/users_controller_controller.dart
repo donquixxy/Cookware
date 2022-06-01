@@ -37,7 +37,7 @@ class UsersControllerController extends GetxController {
 
   Future<void> userLogout() async {
     await firebaseAuth.signOut();
-    await googleSignIn.signOut();
+    googleSignIn.signOut();
   }
 
   Future<UserCredential?> createEmailPassword() async {
@@ -99,9 +99,9 @@ class UsersControllerController extends GetxController {
 
   Future<UserCredential?> loginWithEmailPassword() async {
     try {
-      nameController.clear();
-      emailController.clear();
-      passwordController.clear();
+      // nameController.clear();
+      // emailController.clear();
+      // passwordController.clear();
       var userResult = await firebaseAuth.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
       return userResult;
@@ -116,5 +116,24 @@ class UsersControllerController extends GetxController {
       );
     }
     return null;
+  }
+
+  Future<bool> isAdmin(String uid) async {
+    try {
+      var data =
+          await firebaseFirestore.where('isAdmin', isEqualTo: true).get();
+
+      var result = data.docs;
+
+      return result.length == 1;
+    } on Exception catch (error) {
+      Get.defaultDialog(
+          textConfirm: 'Terjadi Kesalahan ${error}',
+          onConfirm: () {
+            Get.back();
+          });
+
+      return false;
+    }
   }
 }

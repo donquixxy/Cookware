@@ -13,6 +13,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../controllers/overview_controller.dart';
 
 class OverviewView extends GetView<OverviewController> {
+  @override
   final controller = Get.put(OverviewController());
   final usersController = Get.put(UsersControllerController());
   @override
@@ -65,6 +66,7 @@ class OverviewView extends GetView<OverviewController> {
 
                           // Slider Section
                           Container(
+                            padding: EdgeInsets.only(left: 15, right: 15),
                             height: Get.size.height * 0.25,
                             width: double.infinity,
                             decoration: const BoxDecoration(
@@ -90,12 +92,17 @@ class OverviewView extends GetView<OverviewController> {
                                               child: ImageFiltered(
                                                 imageFilter: ImageFilter.blur(
                                                     sigmaX: 1, sigmaY: 2),
-                                                child: FadeInImage.assetNetwork(
-                                                  fit: BoxFit.cover,
-                                                  width: double.infinity,
-                                                  image: data.imageUrl,
-                                                  placeholder:
-                                                      'assets/placeholder.jpg',
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  child:
+                                                      FadeInImage.assetNetwork(
+                                                    fit: BoxFit.cover,
+                                                    width: double.infinity,
+                                                    image: data.imageUrl,
+                                                    placeholder:
+                                                        'assets/placeholder.jpg',
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -209,7 +216,7 @@ class OverviewView extends GetView<OverviewController> {
                                     Get.toNamed(Routes.DETAILSCREEN,
                                         arguments: [dataResep, docId]);
                                   },
-                                  child: Container(
+                                  child: SizedBox(
                                     height: double.infinity,
                                     child: Card(
                                       child: Column(

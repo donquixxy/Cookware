@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/controllers/static_theme.dart';
 import 'package:flutter_application_1/app/controllers/users_controller_controller.dart';
+import 'package:flutter_application_1/app/modules/adminPanel/views/admin_panel_view.dart';
 import 'package:flutter_application_1/app/modules/home/views/home_view.dart';
 import 'package:flutter_application_1/app/routes/app_pages.dart';
 
@@ -30,10 +32,19 @@ class LoginView extends GetView<LoginController> {
       // ),
       body: StreamBuilder(
         stream: usersController.streamUserLogin(),
-        builder: (context, snapshot) {
+        builder: (context, AsyncSnapshot<User?> snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
             if (snapshot.data != null) {
-              return HomeView();
+              // print(snapshot.data);
+              return FutureBuilder(
+                  future: usersController.isAdmin(snapshot.data!.uid),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<bool> resultAdminSnapshot) {
+                    if (resultAdminSnapshot.data == true) {
+                      return AdminPanelView();
+                    }
+                    return HomeView();
+                  });
             }
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             {
