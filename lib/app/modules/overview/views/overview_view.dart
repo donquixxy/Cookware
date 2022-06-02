@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/controllers/resep_provider_controller.dart';
 import 'package:flutter_application_1/app/controllers/static_theme.dart';
-import 'package:flutter_application_1/app/controllers/users_controller_controller.dart';
 import 'package:flutter_application_1/app/data/models/recipe_models.dart';
 import 'package:flutter_application_1/app/routes/app_pages.dart';
 
@@ -15,7 +15,8 @@ import '../controllers/overview_controller.dart';
 class OverviewView extends GetView<OverviewController> {
   @override
   final controller = Get.put(OverviewController());
-  final usersController = Get.put(UsersControllerController());
+  // final usersController = Get.put(UsersControllerController());
+  var resepController = Get.find<ResepProviderController>();
   @override
   Widget build(BuildContext context) {
     // var foreGroundColor = controller.backGroundColor.computeLuminance() > 0.6
@@ -25,7 +26,7 @@ class OverviewView extends GetView<OverviewController> {
     return SafeArea(
       child: Scaffold(
         body: FutureBuilder<QuerySnapshot>(
-          future: controller.streamDataOnDb(),
+          future: resepController.streamDataOnDb(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
@@ -66,7 +67,7 @@ class OverviewView extends GetView<OverviewController> {
 
                           // Slider Section
                           Container(
-                            padding: EdgeInsets.only(left: 15, right: 15),
+                            padding: const EdgeInsets.only(left: 15, right: 15),
                             height: Get.size.height * 0.25,
                             width: double.infinity,
                             decoration: const BoxDecoration(
@@ -79,7 +80,7 @@ class OverviewView extends GetView<OverviewController> {
                                 viewportFraction: 1,
                                 autoPlay: true,
                               ),
-                              items: controller.data1
+                              items: resepController.data1
                                   .map((data) => GestureDetector(
                                         onTap: () {
                                           Get.toNamed(Routes.DETAILSCREEN,

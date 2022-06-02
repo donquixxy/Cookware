@@ -25,6 +25,7 @@ class UsersControllerController extends GetxController {
   final firebaseAuth = FirebaseAuth.instance;
   final googleSignIn = GoogleSignIn();
   final firebaseFirestore = FirebaseFirestore.instance.collection('Users');
+  var imAdmin = false.obs;
 
   var nameController = TextEditingController();
   var emailController = TextEditingController();
@@ -37,6 +38,7 @@ class UsersControllerController extends GetxController {
 
   Future<void> userLogout() async {
     await firebaseAuth.signOut();
+    imAdmin.value = false;
     googleSignIn.signOut();
   }
 
@@ -120,15 +122,22 @@ class UsersControllerController extends GetxController {
 
   Future<bool> isAdmin(String uid) async {
     try {
-      var data =
-          await firebaseFirestore.where('isAdmin', isEqualTo: true).get();
+      var data = await firebaseFirestore.doc(uid).get();
 
-      var result = data.docs;
-
-      return result.length == 1;
-    } on Exception catch (error) {
+      if (data.data()!['isAdmin'] == true) {
+        print('u are admin');
+        imAdmin.value = true;
+        return true;
+      } else {
+        imAdmin.value = false;
+        print('ur not admin');
+        return false;
+      }
+      // print(result.length);
+      // print(result);
+    } on Exception {
       Get.defaultDialog(
-          textConfirm: 'Terjadi Kesalahan ${error}',
+          textConfirm: 'Terjadi Kesalahan',
           onConfirm: () {
             Get.back();
           });

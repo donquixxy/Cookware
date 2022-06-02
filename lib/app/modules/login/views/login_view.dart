@@ -9,6 +9,7 @@ import 'package:flutter_application_1/app/modules/home/views/home_view.dart';
 import 'package:flutter_application_1/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../controllers/login_controller.dart';
@@ -35,16 +36,26 @@ class LoginView extends GetView<LoginController> {
         builder: (context, AsyncSnapshot<User?> snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
             if (snapshot.data != null) {
-              // print(snapshot.data);
               return FutureBuilder(
-                  future: usersController.isAdmin(snapshot.data!.uid),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<bool> resultAdminSnapshot) {
-                    if (resultAdminSnapshot.data == true) {
-                      return AdminPanelView();
-                    }
+                future: usersController.isAdmin(snapshot.data!.uid),
+                builder:
+                    (BuildContext context, AsyncSnapshot<bool> snapshotData) {
+                  if (snapshotData.data == null) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshotData.data!) {
+                    usersController.imAdmin.value = true;
                     return HomeView();
-                  });
+                  } else if (snapshotData.connectionState ==
+                      ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return HomeView();
+                },
+              );
             }
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             {
