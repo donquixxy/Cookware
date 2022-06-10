@@ -6,6 +6,7 @@ import 'package:flutter_application_1/app/controllers/resep_provider_controller.
 import 'package:flutter_application_1/app/controllers/static_theme.dart';
 import 'package:flutter_application_1/app/data/models/recipe_models.dart';
 import 'package:flutter_application_1/app/routes/app_pages.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -84,7 +85,7 @@ class OverviewView extends GetView<OverviewController> {
                                   .map((data) => GestureDetector(
                                         onTap: () {
                                           Get.toNamed(Routes.DETAILSCREEN,
-                                              arguments: [data, 'null']);
+                                              arguments: [data, data.id]);
                                         },
                                         child: Stack(
                                           alignment: Alignment.bottomCenter,
@@ -96,13 +97,21 @@ class OverviewView extends GetView<OverviewController> {
                                                 child: ClipRRect(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
-                                                  child:
-                                                      FadeInImage.assetNetwork(
-                                                    fit: BoxFit.cover,
+                                                  child: CachedNetworkImage(
                                                     width: double.infinity,
-                                                    image: data.imageUrl,
-                                                    placeholder:
-                                                        'assets/placeholder.jpg',
+                                                    fit: BoxFit.cover,
+                                                    imageUrl: data.imageUrl,
+                                                    placeholder: (context,
+                                                            url) =>
+                                                        const CircularProgressIndicator(),
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            const Icon(Icons.error),
+                                                    // fit: BoxFit.cover,
+                                                    // width: double.infinity,
+                                                    // image: data.imageUrl,
+                                                    // placeholder:
+                                                    //     'assets/placeholder.jpg',
                                                   ),
                                                 ),
                                               ),
@@ -231,13 +240,24 @@ class OverviewView extends GetView<OverviewController> {
                                             borderRadius:
                                                 const BorderRadius.all(
                                                     Radius.circular(10)),
-                                            child: FadeInImage.assetNetwork(
+                                            child: CachedNetworkImage(
+                                              imageUrl: dataResep.imageUrl,
                                               height: 150,
                                               fit: BoxFit.cover,
                                               width: double.infinity,
-                                              image: dataResep.imageUrl,
-                                              placeholder:
-                                                  'assets/placeholder.jpg',
+                                              errorWidget: (context, url,
+                                                      widget) =>
+                                                  const Icon(Icons.error,
+                                                      color: Colors.red),
+                                              placeholder: (context, url) =>
+                                                  Image.asset(
+                                                      'assets/placeholder.jpg'),
+                                              // height: 150,
+                                              // fit: BoxFit.cover,
+                                              // width: double.infinity,
+                                              // image: dataResep.imageUrl,
+                                              // placeholder:
+                                              //     'assets/placeholder.jpg',
                                             ),
                                           ),
                                           Padding(

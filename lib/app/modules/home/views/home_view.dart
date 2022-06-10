@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/controllers/static_theme.dart';
 import 'package:flutter_application_1/app/controllers/users_controller_controller.dart';
-import 'package:flutter_application_1/app/modules/addData/views/add_data_view.dart';
 import 'package:flutter_application_1/app/modules/adminPanel/views/admin_panel_view.dart';
 import 'package:flutter_application_1/app/modules/bookmark/views/bookmark_view.dart';
 import 'package:flutter_application_1/app/modules/overview/views/overview_view.dart';
+import 'package:flutter_application_1/app/modules/search/views/search_view.dart';
 import 'package:flutter_application_1/app/modules/userProfile/views/user_profile_view.dart';
 
 import 'package:get/get.dart';
@@ -52,7 +52,7 @@ class HomeView extends GetView<HomeController> {
               () => userController.imAdmin.value == true
                   ? IndexedStack(
                       index: controller.currentIndex.value,
-                      children: [AdminPanelView(), AddDataView()],
+                      children: [AdminPanelView(), SearchView()],
                     )
                   : IndexedStack(
                       index: controller.currentIndex.value,

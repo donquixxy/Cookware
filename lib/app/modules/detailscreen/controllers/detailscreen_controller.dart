@@ -19,6 +19,7 @@ class DetailscreenController extends GetxController {
         .doc(docId);
 
     Recipes _addedResep = Recipes(
+        id: documentId,
         name: resep.name,
         description: resep.description,
         listIngredients: resep.listIngredients,

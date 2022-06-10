@@ -16,6 +16,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/overview/bindings/overview_binding.dart';
 import '../modules/overview/views/overview_view.dart';
+import '../modules/search/bindings/search_binding.dart';
+import '../modules/search/views/search_view.dart';
 import '../modules/sign_up/bindings/sign_up_binding.dart';
 import '../modules/sign_up/views/sign_up_view.dart';
 import '../modules/userProfile/bindings/user_profile_binding.dart';
@@ -78,6 +80,11 @@ class AppPages {
       name: _Paths.ADMIN_PANEL,
       page: () => AdminPanelView(),
       binding: AdminPanelBinding(),
+    ),
+    GetPage(
+      name: _Paths.SEARCH,
+      page: () => SearchView(),
+      binding: SearchBinding(),
     ),
   ];
 }

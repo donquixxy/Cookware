@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/data/models/recipe_models.dart';
 
@@ -31,43 +32,81 @@ class DetailscreenView extends GetView<DetailscreenController> {
     return Scaffold(
       body: SingleChildScrollView(
           child: Stack(children: [
-        Container(
+        SizedBox(
           width: screenWidth,
           height: screenHeight * 0.35,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: NetworkImage(resep.imageUrl), fit: BoxFit.cover)),
-          child: SafeArea(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: const Icon(Icons.arrow_back)),
-                IconButton(
-                  onPressed: () {
-                    print(documentId);
-                    print(controller.firebaseAuth.currentUser);
-                    print('clicked');
-                    controller.addLikedIdToDB(
-                        docId: documentId,
-                        currentUserId:
-                            controller.firebaseAuth.currentUser!.uid);
-                    // controller.addDataToList(documentId: documentId);
-                    // controller.addLikedIdToDb(
-                    //     documentId: documentId,
-                    //     currentUser: FirebaseAuth.instance.currentUser!);
-                  },
-                  icon: const Icon(Icons.favorite_border),
+          child: CachedNetworkImage(
+            imageUrl: resep.imageUrl,
+            fit: BoxFit.cover,
+          ),
+        ),
+        SafeArea(
+          child: Align(
+            alignment: Alignment.topRight,
+            child: IconButton(
+                onPressed: () {
+                  controller.addLikedIdToDB(
+                      docId: documentId,
+                      currentUserId: controller.firebaseAuth.currentUser!.uid);
+                },
+                icon: const Icon(
+                  Icons.favorite_border,
                   color: Colors.pink,
-                )
-              ],
+                )),
+          ),
+        ),
+        SafeArea(
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
             ),
           ),
         ),
+        // Container(
+        //   width: screenWidth,
+        //   height: screenHeight * 0.35,
+        //   decoration: BoxDecoration(
+        //     image: DecorationImage(
+        //         image: NetworkImage(resep.imageUrl), fit: BoxFit.cover),
+        //   ),
+        //   child: SafeArea(
+        //     child: Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //       crossAxisAlignment: CrossAxisAlignment.start,
+        //       children: [
+        //         IconButton(
+        //             onPressed: () {
+        //               Get.back();
+        //             },
+        //             icon: const Icon(Icons.arrow_back)),
+        //         IconButton(
+        //           onPressed: () {
+        //             print(documentId);
+        //             print(controller.firebaseAuth.currentUser);
+        //             print('clicked');
+        //             controller.addLikedIdToDB(
+        //                 docId: documentId,
+        //                 currentUserId:
+        //                     controller.firebaseAuth.currentUser!.uid);
+        //             // controller.addDataToList(documentId: documentId);
+        //             // controller.addLikedIdToDb(
+        //             //     documentId: documentId,
+        //             //     currentUser: FirebaseAuth.instance.currentUser!);
+        //           },
+        //           icon: const Icon(Icons.favorite_border),
+        //           color: Colors.pink,
+        //         )
+        //       ],
+        //     ),
+        //   ),
+        // ),
         Container(
           margin: EdgeInsets.only(top: screenHeight * 0.3),
           width: double.infinity,

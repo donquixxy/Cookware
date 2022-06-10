@@ -16,6 +16,7 @@ abstract class Routes {
   static const SIGN_UP = _Paths.SIGN_UP;
   static const ADMIN_PANEL = _Paths.ADMIN_PANEL;
   static const LANDING_PAGE = _Paths.LANDING_PAGE;
+  static const SEARCH = _Paths.SEARCH;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const SIGN_UP = '/sign-up';
   static const ADMIN_PANEL = '/admin-panel';
   static const LANDING_PAGE = '/landing-page';
+  static const SEARCH = '/search';
 }

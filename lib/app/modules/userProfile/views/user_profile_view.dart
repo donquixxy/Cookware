@@ -116,10 +116,10 @@ class UserProfileView extends GetView<UserProfileController> {
                               Get.toNamed(Routes.DETAILSCREEN,
                                   arguments: [resep, docId]);
                             },
-                            onLongPress: () {
-                              controller.showPopUp(
-                                  arguments: [resep, docId], docId: docId);
-                            },
+                            // onLongPress: () {
+                            //   controller.showPopUp(
+                            //       arguments: [resep, docId], docId: docId);
+                            // },
                             child: Container(
                               padding: const EdgeInsets.only(
                                   left: 10, top: 8, right: 10),
@@ -195,14 +195,13 @@ class UserProfileView extends GetView<UserProfileController> {
                                         )
                                       ],
                                     ),
-                                    Row(children: [
+                                    Wrap(children: [
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             top: 10, left: 8, right: 8),
                                         child: Text(
                                           resep.name,
-                                          overflow: TextOverflow.clip,
-                                          softWrap: false,
+                                          overflow: TextOverflow.visible,
                                           style: const TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold),

@@ -54,7 +54,10 @@ class AddDataController extends GetxController with StateMixin {
         final _uploadedFile = await imagePath.putFile(file);
         final _imageUrl = await _uploadedFile.ref.getDownloadURL();
 
+        String documentId = collectionRefs.doc().id;
+
         Recipes _addedResep = Recipes(
+            id: documentId,
             name: namaResepController.text,
             description: deskripsiController.text,
             listIngredients: chipWord,
@@ -63,20 +66,38 @@ class AddDataController extends GetxController with StateMixin {
             imageUrl: _imageUrl,
             uidCreator: firebaseAuth.currentUser!.uid);
 
-        await collectionRefs.add(_addedResep.toJson()).then(
-              (value) => {
-                isLoading.toggle(),
-                Get.defaultDialog(
-                  title: 'Data Tersimpan !',
-                  middleText: 'Berhasil Menambahkan Resep',
-                  textConfirm: "OK",
-                  onConfirm: () {
-                    Get.back();
-                    Get.back();
-                  },
-                )
-              },
-            );
+        // await collectionRefs.add(_addedResep.toJson()).then(
+        //       (value) => {
+        //         isLoading.toggle(),
+        //         Get.defaultDialog(
+        //           title: 'Data Tersimpan !',
+        //           middleText: 'Berhasil Menambahkan Resep',
+        //           textConfirm: "OK",
+        //           onConfirm: () {
+        //             Get.back();
+        //             Get.back();
+        //           },
+        //         )
+        //       },
+        //     );
+
+        await collectionRefs.doc(documentId).set(_addedResep.toJson());
+
+        isLoading.toggle();
+        Get.defaultDialog(
+          title: 'Data Tersimpan !',
+          middleText: 'Berhasil Menambahkan Resep',
+          textConfirm: "OK",
+          onConfirm: () {
+            Get.back();
+            Get.back();
+          },
+        );
+
+        //  await collectionRefs.doc().set(
+
+        //  )
+
       } on FirebaseException catch (error) {
         Get.defaultDialog(
           title: error.message!,
