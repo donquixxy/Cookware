@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class ResepProviderController extends GetxController {
   final collectionRefs = FirebaseFirestore.instance.collection('Recipes');
-  List<Recipes> data1 = [];
+  var data1 = <Recipes>[].obs;
 
   Future<QuerySnapshot> streamDataOnDb() async {
     final _snapshot = await collectionRefs.get();
@@ -24,8 +24,14 @@ class ResepProviderController extends GetxController {
       _recipesList.add(dataResep);
     }).toList();
 
-    data1 = _recipesList;
+    data1.value = _recipesList;
     return _snapshot;
+  }
+
+  @override
+  void onInit() {
+    streamDataOnDb();
+    super.onInit();
   }
 
   void deleteResep(String docId) {

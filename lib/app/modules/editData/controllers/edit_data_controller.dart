@@ -109,21 +109,9 @@ class EditDataController extends GetxController {
 
       firebaseFirestore.collection('Recipes').doc(id).update(newData.toJson());
 
-      print(newData.name);
-      print(newData.id);
-      print(newData.recipeBy);
-      // firebaseFirestore
-      //     .collection('Recipes')
-      //     .doc(id)
-      //     .set(newData.toJson(), SetOptions());
-      // Get.defaultDialog(
-      //     title: 'Data Updated',
-      //     middleText: 'Data berhasil terupdate',
-      //     textConfirm: 'Ok',
-      //     onConfirm: () {
-      //       Get.back();
-      //       Get.back();
-      //     });
+      // print(newData.name);
+      // print(newData.id);
+      // print(newData.recipeBy);
 
       Get.snackbar(
         'Data Updated',

@@ -44,87 +44,16 @@ class SearchController extends GetxController {
         .where('namaResep', isLessThan: query + 'z')
         .get();
 
-    // List testList = [];
-    // Map<String, dynamic> abcd = {};
-    // Map<String, dynamic> values = {};
-
-    // print(data.docs);
-
     for (var result in data.docs) {
-      // print(result.data());
-      // temporary.clear();
       var asdfa = result.data();
 
       Recipes filterResep = Recipes.fromJson(result.data());
 
-      // var test = asdfa.startsWith(query[0].capitalizeFirst.toString());
-      var isValid =
+      bool isValid =
           asdfa['namaResep'][0] == query[0].capitalizeFirst.toString();
 
-      var okie = result.id;
-
-      // print('okie ${okie}');
-
-      // print('text ${asdfa} hasilnya ${test}');
-
-      // testList.addIf(test, filterResep);
-
-      // listSearched.addIf(test, filterResep);
-
+      String docId = result.id;
       temporary.addIf(isValid, filterResep);
-
-      // for (var index = 0; index < temporary.length; index++) {
-      //   if (!temporary[index].name.contains(filterResep.name)) {
-      //     temporary.removeAt(index);
-      //   }
-      // }
-
-      // print(lister);
-
-      // for (var items in asdfa.entries) {
-      //   abcd.putIfAbsent('docId', () {
-      //     var isOk =
-      //         asdfa['namaResep'][0] == query[0].capitalizeFirst.toString();
-
-      //     if (isOk){}
-
-      //   });
-      // }
-
-      // values.addIf(test, "docId", okie);
-      // abcd.addIf(test, 'dataResep', result.data());
-
-      // // Map<String, dynamic> thirdMap = {...values, ...abcd};
-
-      // // print(thirdMap);
-
-      // resultQuery = {...values, ...abcd};
-
-      // print(resultQuery.length);
-
-      // print(resultQuery);
-
-      // print(listOfMappedResep);
-
-      // print(values);
-
-      // abcd.map((key, value){
-      //   abcd.putIfAbsent(key, () => null)
-      // })
-
-      // abcd.addIf(
-      //   test,
-      //   'docId',
-      // );
-
-      // print(abcd);
-
-      // print(test);
-
-      // var test =
-      //     result.data().containsValue(query.capitalizeFirst![0].toString());
-
-      // print(test);
     }
 
     lister = temporary;

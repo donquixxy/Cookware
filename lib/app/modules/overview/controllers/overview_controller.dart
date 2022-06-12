@@ -9,14 +9,13 @@ class OverviewController extends GetxController {
 
   @override
   void onInit() {
-    // streamDataOnDb();
-    getResepFromDb();
+    myController.streamDataOnDb();
     super.onInit();
   }
 
-  void getResepFromDb() {
-    myController.streamDataOnDb();
-  }
+  // void getResepFromDb() {
+  //   myController.streamDataOnDb();
+  // }
 
   void changeCurrentIndexScreen(int index) {
     currentIndex.value = index;
