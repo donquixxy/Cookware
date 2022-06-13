@@ -6,7 +6,6 @@ import 'package:flutter_application_1/app/data/models/recipe_models.dart';
 import 'package:get/get.dart';
 
 class EditDataController extends GetxController {
-  //TODO: Implement EditDataController
   Recipes oldData = Get.arguments[0];
   var firstValue = [];
   List chipWord = [].obs;

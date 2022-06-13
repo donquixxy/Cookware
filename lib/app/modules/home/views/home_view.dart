@@ -13,11 +13,9 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  @override
-  final controller = Get.put(HomeController());
-  final userController = Get.find<UsersControllerController>();
-  @override
   Widget build(BuildContext context) {
+    var controller = Get.put(HomeController());
+    var userController = Get.find<UsersControllerController>();
     return Obx(
       (() => Scaffold(
             appBar: AppBar(

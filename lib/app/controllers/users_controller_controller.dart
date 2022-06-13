@@ -45,7 +45,7 @@ class UsersControllerController extends GetxController {
   Future<UserCredential?> createEmailPassword() async {
     try {
       if (nameController.text.isEmpty &&
-          nameController.text.isEmpty &&
+          emailController.text.isEmpty &&
           passwordController.text.isEmpty) {
         Get.defaultDialog(
           title: 'Error',
@@ -68,9 +68,10 @@ class UsersControllerController extends GetxController {
       UserModels newUser = UserModels(
           email: emailController.text,
           displayName: nameController.text,
-          uid: uid);
+          uid: uid,
+          isAdmin: false);
 
-      firebaseFirestore.doc(uid).set(newUser.toJson());
+      await firebaseFirestore.doc(uid).set(newUser.toJson());
 
       Get.defaultDialog(
         title: 'Daftar Berhasil',
@@ -123,8 +124,10 @@ class UsersControllerController extends GetxController {
   Future<bool> isAdmin(String uid) async {
     try {
       var data = await firebaseFirestore.doc(uid).get();
-
-      if (data.data()!['isAdmin'] == true) {
+      var results = data.data();
+      print(results);
+      // UserModels userLogin = UserModels.fromJson(results!);
+      if (data.data()?['isAdmin'] == true) {
         print('u are admin');
         imAdmin.value = true;
         return true;
@@ -133,6 +136,15 @@ class UsersControllerController extends GetxController {
         print('ur not admin');
         return false;
       }
+
+      // if (userLogin.isAdmin) {
+      //   imAdmin.value = false;
+      //   return true;
+      // } else {
+      //   imAdmin.value = false;
+      //   return false;
+      // }
+
       // print(result.length);
       // print(result);
     } on Exception {

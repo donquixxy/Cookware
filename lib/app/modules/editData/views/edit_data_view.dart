@@ -5,14 +5,13 @@ import 'package:flutter_application_1/app/data/models/recipe_models.dart';
 
 import 'package:get/get.dart';
 
-import '../../../controllers/image_picker_controller.dart';
 import '../controllers/edit_data_controller.dart';
 import 'dart:math';
 
 class EditDataView extends GetView<EditDataController> {
   @override
   Widget build(BuildContext context) {
-    var imagePickerController = Get.put(ImagePickerController());
+    // var imagePickerController = Get.put(ImagePickerController());
     Recipes resep = Get.arguments[0];
     var documentId = Get.arguments[1];
 

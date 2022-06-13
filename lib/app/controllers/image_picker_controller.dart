@@ -15,7 +15,6 @@ class ImagePickerController extends GetxController {
           await _picker.pickImage(source: ImageSource.camera);
       image = File(imagePicked!.path);
       adaIsi.toggle();
-      print(adaIsi);
     } catch (error) {
       Get.defaultDialog(
           title: "Error",

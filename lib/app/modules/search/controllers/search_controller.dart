@@ -52,7 +52,7 @@ class SearchController extends GetxController {
       bool isValid =
           asdfa['namaResep'][0] == query[0].capitalizeFirst.toString();
 
-      String docId = result.id;
+      // String docId = result.id;
       temporary.addIf(isValid, filterResep);
     }
 
@@ -61,18 +61,6 @@ class SearchController extends GetxController {
     for (var element in lister) {
       print(element.name);
     }
-    // valuesResep.value = resultQuery;
-
-    // print(valuesResep);
-    // testList.forEach((element) {
-    //   print(element);
-    // });
-
-    // lister.value = testList;
-
-    // listSearched.forEach((element) {
-    //   print(element.name);
-    // });
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> searchText(String keywords) {

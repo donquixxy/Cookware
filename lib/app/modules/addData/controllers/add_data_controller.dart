@@ -66,21 +66,6 @@ class AddDataController extends GetxController with StateMixin {
             imageUrl: _imageUrl,
             uidCreator: firebaseAuth.currentUser!.uid);
 
-        // await collectionRefs.add(_addedResep.toJson()).then(
-        //       (value) => {
-        //         isLoading.toggle(),
-        //         Get.defaultDialog(
-        //           title: 'Data Tersimpan !',
-        //           middleText: 'Berhasil Menambahkan Resep',
-        //           textConfirm: "OK",
-        //           onConfirm: () {
-        //             Get.back();
-        //             Get.back();
-        //           },
-        //         )
-        //       },
-        //     );
-
         await collectionRefs.doc(documentId).set(_addedResep.toJson());
 
         isLoading.toggle();
@@ -93,11 +78,6 @@ class AddDataController extends GetxController with StateMixin {
             Get.back();
           },
         );
-
-        //  await collectionRefs.doc().set(
-
-        //  )
-
       } on FirebaseException catch (error) {
         Get.defaultDialog(
           title: error.message!,
@@ -114,32 +94,5 @@ class AddDataController extends GetxController with StateMixin {
         },
       );
     }
-  }
-
-  Future<void> getDataFromDB() async {
-    List<Recipes> kosong = [];
-    var refs = await firebaseFirestore.collection('Recipes').get();
-
-    var data1 = refs.docs;
-
-    // var newData = data.map((documents) => kosong.add(Recipes(
-    //     name: documents['namaResep'],
-    //     description: documents['namaResep'],
-    //     listIngredients: documents['listIngredients'],
-    //     cookTime: documents['cookTime'],
-    //     recipeBy: documents['cookTime'],
-    //     imageUrl: documents['imageUrl'],
-    //     uidCreator: documents['uidCreator'])));
-
-    //GET Object From Firebase based on INDEX [0] is the INDEX
-    var newData = data1[0].data();
-
-    //Add The Object to the list Of Recipes\\
-    kosong.add(Recipes.fromJson(newData));
-
-    //Print what is inside\\
-    print(kosong);
-
-    // print(newData);
   }
 }

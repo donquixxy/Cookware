@@ -33,12 +33,13 @@ class LoginController extends GetxController with StateMixin {
           if (!_exist.exists) {
             try {
               UserModels _newUser = UserModels(
-                email: userCredential.user!.email!,
-                displayName: userCredential.user!.displayName!,
-                uid: userCredential.user!.uid,
-                // likedItems: []
-              );
-              final newUserData = await _collectionRefs
+                  email: userCredential.user!.email!,
+                  displayName: userCredential.user!.displayName!,
+                  uid: userCredential.user!.uid,
+                  isAdmin: false
+                  // likedItems: []
+                  );
+              _collectionRefs
                   .doc(userCredential.user!.uid)
                   .set(_newUser.toJson());
             } on FirebaseAuthException catch (error) {

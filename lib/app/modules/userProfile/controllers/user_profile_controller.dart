@@ -8,7 +8,7 @@ class UserProfileController extends GetxController with StateMixin {
   var firebaseFirestore = FirebaseFirestore.instance.collection('Recipes');
   // Set<Recipes> userData = {};
   // Set<Recipes> filteredSet = {};
-  var userController = Get.find<OverviewController>();
+  var userController = Get.put(OverviewController());
 
   Stream<QuerySnapshot<Map<String, dynamic>>> userDataList(
       {required String uid}) {

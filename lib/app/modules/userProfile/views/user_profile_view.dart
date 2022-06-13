@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/controllers/static_theme.dart';
@@ -137,11 +138,16 @@ class UserProfileView extends GetView<UserProfileController> {
                                         ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          child: Image.network(
-                                            resep.imageUrl,
+                                          child: CachedNetworkImage(
+                                            imageUrl: resep.imageUrl,
                                             fit: BoxFit.cover,
                                             height: 150,
                                             width: double.infinity,
+                                            errorWidget: (context, url, _) =>
+                                                const Icon(
+                                              Icons.error,
+                                              color: Colors.red,
+                                            ),
                                           ),
                                         ),
                                         Align(
@@ -164,13 +170,11 @@ class UserProfileView extends GetView<UserProfileController> {
                                                       arguments: [resep, docId],
                                                     );
                                                   },
-                                                  child: Container(
-                                                    child: Row(
-                                                      children: const [
-                                                        Icon(Icons.edit),
-                                                        Text("Edit")
-                                                      ],
-                                                    ),
+                                                  child: Row(
+                                                    children: const [
+                                                      Icon(Icons.edit),
+                                                      Text("Edit")
+                                                    ],
                                                   ),
                                                 ),
                                               ),
@@ -180,13 +184,11 @@ class UserProfileView extends GetView<UserProfileController> {
                                                     controller.deleteRecipe(
                                                         docId: docId);
                                                   },
-                                                  child: Container(
-                                                    child: Row(
-                                                      children: const [
-                                                        Icon(Icons.delete),
-                                                        Text("Delete")
-                                                      ],
-                                                    ),
+                                                  child: Row(
+                                                    children: const [
+                                                      Icon(Icons.delete),
+                                                      Text("Delete")
+                                                    ],
                                                   ),
                                                 ),
                                               )
@@ -249,7 +251,7 @@ class UserProfileView extends GetView<UserProfileController> {
               }
             }
             return const Center(
-              child: Text("No Data Yet"),
+              child: CircularProgressIndicator(),
             );
           },
         ),

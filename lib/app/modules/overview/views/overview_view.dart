@@ -9,21 +9,18 @@ import 'package:flutter_application_1/app/routes/app_pages.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:get/get.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../controllers/overview_controller.dart';
 
 class OverviewView extends GetView<OverviewController> {
-  @override
-  final controller = Get.put(OverviewController());
   // final usersController = Get.put(UsersControllerController());
-  var resepController = Get.find<ResepProviderController>();
+
   @override
   Widget build(BuildContext context) {
     // var foreGroundColor = controller.backGroundColor.computeLuminance() > 0.6
     //     ? Colors.black87
     //     : Colors.white70;
-
+    var resepController = Get.put(ResepProviderController());
     return SafeArea(
       child: Scaffold(
           body: Obx(
