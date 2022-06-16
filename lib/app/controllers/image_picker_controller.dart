@@ -34,7 +34,7 @@ class ImagePickerController extends GetxController {
           await _picker.pickImage(source: ImageSource.gallery);
       image = File(imagePicked!.path);
       adaIsi.toggle();
-      print(adaIsi);
+      //print(adaIsi);
     } catch (error) {
       Get.defaultDialog(
           title: "Error",
@@ -49,27 +49,25 @@ class ImagePickerController extends GetxController {
 
   void pickImageFrom() {
     Get.bottomSheet(SafeArea(
-        child: Container(
-      child: Wrap(
-        children: [
-          ListTile(
-            leading: const Icon(Icons.add_a_photo),
-            title: const Text("Pick from camera"),
-            onTap: () {
-              getImageFromCamera(image);
-              Get.back();
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.file_upload),
-            title: const Text("Pick from Gallery"),
-            onTap: () {
-              getImageFromGallery(image);
-              Get.back();
-            },
-          )
-        ],
-      ),
+        child: Wrap(
+      children: [
+        ListTile(
+          leading: const Icon(Icons.add_a_photo),
+          title: const Text("Pick from camera"),
+          onTap: () {
+            getImageFromCamera(image);
+            Get.back();
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.file_upload),
+          title: const Text("Pick from Gallery"),
+          onTap: () {
+            getImageFromGallery(image);
+            Get.back();
+          },
+        )
+      ],
     )));
   }
 }

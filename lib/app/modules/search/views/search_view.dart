@@ -74,22 +74,20 @@ class SearchView extends GetView<SearchController> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Container(
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            controller.lister[index].name,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.clip,
-                                            style: const TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                          const SizedBox(
-                                            width: 50,
-                                          ),
-                                        ],
-                                      ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          controller.lister[index].name,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.clip,
+                                          style: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        const SizedBox(
+                                          width: 50,
+                                        ),
+                                      ],
                                     ),
                                     Container(
                                       padding: const EdgeInsets.only(top: 10),

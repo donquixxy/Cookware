@@ -13,6 +13,7 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
+  @override
   Widget build(BuildContext context) {
     var controller = Get.put(HomeController());
     var userController = Get.find<UsersControllerController>();
@@ -21,15 +22,13 @@ class HomeView extends GetView<HomeController> {
             appBar: AppBar(
               backgroundColor: greenColor,
               elevation: 0,
-              title: Container(
-                child: Row(
-                  children: const [
-                    Spacer(),
-                    Icon(Icons.restaurant_menu),
-                    Text("Cookware"),
-                    Spacer(),
-                  ],
-                ),
+              title: Row(
+                children: const [
+                  Spacer(),
+                  Icon(Icons.restaurant_menu),
+                  Text("Cookware"),
+                  Spacer(),
+                ],
               ),
               actions: [
                 // IconButton(

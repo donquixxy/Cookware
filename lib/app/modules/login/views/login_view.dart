@@ -14,9 +14,9 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  final usersController = Get.put(UsersControllerController());
   @override
   Widget build(BuildContext context) {
+    var usersController = Get.put(UsersControllerController());
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Colors.transparent,

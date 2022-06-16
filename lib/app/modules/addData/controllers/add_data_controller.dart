@@ -59,7 +59,7 @@ class AddDataController extends GetxController with StateMixin {
         Recipes _addedResep = Recipes(
             id: documentId,
             name: namaResepController.text,
-            description: deskripsiController.text,
+            description: deskripsiController.text.trim(),
             listIngredients: chipWord,
             cookTime: cookTimeController.text,
             recipeBy: firebaseAuth.currentUser!.displayName!,
