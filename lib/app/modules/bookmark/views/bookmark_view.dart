@@ -57,118 +57,112 @@ class BookmarkView extends GetView<BookmarkController> {
                       ],
                     ),
                   ),
-                  RefreshIndicator(
-                    onRefresh: () async {
-                      controller.streamUserBookmarkData(
-                          currentuid: controller.firebaseCurrentUser!.uid);
-                    },
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        var _data = snapshot.data!.docs[index].data()
-                            as Map<String, dynamic>;
-                        var docId = snapshot.data!.docs[index].id;
-                        Recipes resepData = Recipes.fromJson(_data);
-                        return GestureDetector(
-                          onTap: () {
-                            Get.toNamed(Routes.DETAILSCREEN,
-                                arguments: [resepData, docId]);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Card(
-                              elevation: 3,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  //Image Section
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: CachedNetworkImage(
-                                      imageUrl: resepData.imageUrl,
-                                      height: 120,
-                                      width: 120,
-                                      fit: BoxFit.cover,
-                                    ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var _data = snapshot.data!.docs[index].data()
+                          as Map<String, dynamic>;
+                      var docId = snapshot.data!.docs[index].id;
+                      Recipes resepData = Recipes.fromJson(_data);
+                      return GestureDetector(
+                        onTap: () {
+                          Get.toNamed(Routes.DETAILSCREEN,
+                              arguments: [resepData, docId]);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            elevation: 3,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                //Image Section
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: CachedNetworkImage(
+                                    imageUrl: resepData.imageUrl,
+                                    height: 120,
+                                    width: 120,
+                                    fit: BoxFit.cover,
                                   ),
+                                ),
 
-                                  //End of Image Section
+                                //End of Image Section
 
-                                  Expanded(
-                                    child: Container(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, top: 10),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Column(
+                                Expanded(
+                                  child: Container(
+                                    padding: const EdgeInsets.only(
+                                        left: 20, top: 10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Text(
+                                              resepData.name,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.clip,
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight:
+                                                      FontWeight.w600),
+                                            ),
+                                            const SizedBox(
+                                              width: 50,
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 10),
+                                          child: Text(
+                                            "by ${resepData.recipeBy}",
+                                            style: const TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300),
+                                          ),
+                                        ),
+                                        Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 10),
+                                          child: Row(
                                             children: [
-                                              Text(
-                                                resepData.name,
-                                                maxLines: 1,
-                                                overflow: TextOverflow.clip,
-                                                style: const TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight:
-                                                        FontWeight.w600),
+                                              const Icon(
+                                                Icons.timer_sharp,
+                                                size: 18,
+                                                color: greenColor,
                                               ),
-                                              const SizedBox(
-                                                width: 50,
-                                              ),
+                                              Text(resepData.cookTime)
                                             ],
                                           ),
-                                          Container(
-                                            padding:
-                                                const EdgeInsets.only(top: 10),
-                                            child: Text(
-                                              "by ${resepData.recipeBy}",
-                                              style: const TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w300),
-                                            ),
-                                          ),
-                                          Container(
-                                            padding:
-                                                const EdgeInsets.only(top: 10),
-                                            child: Row(
-                                              children: [
-                                                const Icon(
-                                                  Icons.timer_sharp,
-                                                  size: 18,
-                                                  color: greenColor,
-                                                ),
-                                                Text(resepData.cookTime)
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  const Spacer(),
-                                  Column(
-                                    children: [
-                                      IconButton(
-                                        onPressed: () {
-                                          controller.deleteFromBookmark(
-                                              docId,
-                                              controller
-                                                  .firebaseCurrentUser!.uid);
-                                        },
-                                        icon: const Icon(Icons.bookmark,
-                                            color: greenColor),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
+                                ),
+                                const Spacer(),
+                                Column(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        controller.deleteFromBookmark(
+                                            docId,
+                                            controller
+                                                .firebaseCurrentUser!.uid);
+                                      },
+                                      icon: const Icon(Icons.bookmark,
+                                          color: greenColor),
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
