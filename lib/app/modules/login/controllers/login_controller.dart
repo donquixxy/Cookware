@@ -4,16 +4,17 @@ import 'package:flutter_application_1/app/data/models/user_models.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class LoginController extends GetxController with StateMixin {
+class LoginController extends GetxController {
   final _firebaseAuth = FirebaseAuth.instance;
   final _firebaseFirestore = FirebaseFirestore.instance;
+  var isClicked = false.obs;
 
   Future<void> loginWithGoogle() async {
     final _collectionRefs = _firebaseFirestore.collection('Users');
     final _googleSignIn = GoogleSignIn();
     final _account = await _googleSignIn.signIn();
     try {
-      change(null, status: RxStatus.loading());
+      isClicked.isFalse;
       if (_account != null) {
         final _googleAuth = await _account.authentication;
 
@@ -52,7 +53,6 @@ class LoginController extends GetxController with StateMixin {
                   });
             }
           }
-          change(null, status: RxStatus.success());
         } on FirebaseAuthException catch (error) {
           Get.defaultDialog(
               middleText: error.message!,
@@ -62,6 +62,7 @@ class LoginController extends GetxController with StateMixin {
                 Get.back();
               });
         }
+        isClicked.isTrue;
       }
     } catch (error) {
       Get.defaultDialog(
@@ -76,6 +77,8 @@ class LoginController extends GetxController with StateMixin {
           loginWithGoogle();
         },
       );
+    } finally {
+      isClicked.isFalse;
     }
   }
 }

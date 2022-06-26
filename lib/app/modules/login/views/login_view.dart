@@ -104,17 +104,22 @@ class LoginView extends GetView<LoginController> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(26, 18, 26, 18),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(50, 50), primary: greenColor),
-                  onPressed: () {
-                    usersController.loginWithEmailPassword();
-                    // print('clicked');
-                  },
-                  child: Text(
-                    "SIGN IN",
-                    style: textStyle,
-                  ),
-                ),
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: Size(50, 50), primary: greenColor),
+                    onPressed: () {
+                      usersController.loginWithEmailPassword();
+                      // print('clicked');
+                    },
+                    child: Obx(
+                      () => controller.isClicked.isTrue
+                          ? Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            )
+                          : Text(
+                              "SIGN IN",
+                              style: textStyle,
+                            ),
+                    )),
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
