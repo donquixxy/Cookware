@@ -58,6 +58,7 @@ class BookmarkView extends GetView<BookmarkController> {
                     ),
                   ),
                   ListView.builder(
+                    physics: ClampingScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -73,6 +74,8 @@ class BookmarkView extends GetView<BookmarkController> {
                         child: Container(
                           padding: const EdgeInsets.all(8.0),
                           child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
                             elevation: 3,
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,8 +109,7 @@ class BookmarkView extends GetView<BookmarkController> {
                                               overflow: TextOverflow.clip,
                                               style: const TextStyle(
                                                   fontSize: 20,
-                                                  fontWeight:
-                                                      FontWeight.w600),
+                                                  fontWeight: FontWeight.w600),
                                             ),
                                             const SizedBox(
                                               width: 50,

@@ -33,8 +33,9 @@ class UserProfileView extends GetView<UserProfileController> {
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
-                return LayoutBuilder(builder: (context, Constraints) {
+                return LayoutBuilder(builder: (context, constraints) {
                   return ListView(
+                    physics: ClampingScrollPhysics(),
                     children: [
                       Container(
                         margin: const EdgeInsets.only(top: 30),
@@ -47,7 +48,7 @@ class UserProfileView extends GetView<UserProfileController> {
                               backgroundImage: NetworkImage(
                                 userController
                                         .firebaseAuth.currentUser!.photoURL ??
-                                    '',
+                                    'https://www.kindpng.com/picc/m/99-997900_headshot-silhouette-person-placeholder-hd-png-download.png',
                               ),
                             ),
                             Text(

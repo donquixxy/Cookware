@@ -19,8 +19,8 @@ class AdminPanelController extends GetxController {
             element.name.contains(keywords[0].capitalizeFirst.toString()))
         .toList();
 
-    print(resepController.data1.length);
-    print(result);
+    // print(resepController.data1.length);
+    // print(result);
 
     for (var data in result) {
       // resultLists.clear();

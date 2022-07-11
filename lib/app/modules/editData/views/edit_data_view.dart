@@ -125,9 +125,9 @@ class EditDataView extends GetView<EditDataController> {
                           itemBuilder: (BuildContext context, int index) {
                             return Chip(
                               onDeleted: () {
-                                print(index);
+                                // print(index);
                                 controller.deleteDataChip(index);
-                                print(index);
+                                // print(index);
                               },
                               backgroundColor: Colors.primaries[
                                   Random().nextInt(Colors.primaries.length)],

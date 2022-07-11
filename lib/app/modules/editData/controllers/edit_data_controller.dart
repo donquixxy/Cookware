@@ -50,6 +50,7 @@ class EditDataController extends GetxController {
       TextEditingController(text: resep.value.imageUrl);
 
   void getNewData() {
+
     chipWord = oldData.listIngredients;
     resep.value.name = oldData.name;
     resep.value.description = oldData.description;
@@ -59,14 +60,14 @@ class EditDataController extends GetxController {
     resep.value.imageUrl = oldData.imageUrl;
     resep.value.uidCreator = oldData.uidCreator;
 
-    print(resep.value.name);
-    print(resep.value.listIngredients);
-    print(resep.value.cookTime);
+    // print(resep.value.name);
+    // print(resep.value.listIngredients);
+    // print(resep.value.cookTime);
   }
 
   void addDataToChip(String text) {
     chipWord.add(text);
-    print(chipWord);
+    // print(chipWord);
     chipWordController.clear();
     resep.refresh();
   }
@@ -83,7 +84,7 @@ class EditDataController extends GetxController {
           Get.back();
           resep.refresh();
         });
-    print('rebuild');
+    // print('rebuild');
   }
 
   Future<DocumentSnapshot<Map<String, dynamic>>> getDataFromDb(
@@ -141,7 +142,7 @@ class EditDataController extends GetxController {
   @override
   void dispose() {
     chipWordController.dispose();
-    print('dispoed');
+    // print('dispoed');
     super.dispose();
   }
 }

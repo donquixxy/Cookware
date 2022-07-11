@@ -24,19 +24,19 @@ class AddDataController extends GetxController with StateMixin {
 
   void addDataToChip(String text) {
     chipWord.add(text);
-    print(chipWord);
+    // print(chipWord);
     chipWordController.clear();
   }
 
   void deleteDataChip(int index) {
     chipWord.removeAt(index);
-    print(chipWord);
+    // print(chipWord);
   }
 
   @override
   void dispose() {
     chipWordController.dispose();
-    print('dispoed');
+    // print('dispoed');
     super.dispose();
   }
 

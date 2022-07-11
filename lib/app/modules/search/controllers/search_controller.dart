@@ -12,8 +12,6 @@ class SearchController extends GetxController {
   var listSearched = [].obs;
   // var testData = {}.obs;
   List<Recipes> lister = <Recipes>[].obs;
-  var listOfMappedResep = <String, dynamic>{}.obs;
-  var valuesResep = <String, dynamic>{}.obs;
 
   Future<QuerySnapshot> searchRecipeByKeywords(
       String keywords, List<Recipes> temp) async {
@@ -27,7 +25,7 @@ class SearchController extends GetxController {
 
     for (var resepList in data.docs) {
       var result = resepList.data();
-      print(result);
+      // print(result);
       Recipes resep = Recipes.fromJson(result);
       temp.add(resep);
       // testData.addAll(result);
@@ -58,9 +56,9 @@ class SearchController extends GetxController {
 
     lister = temporary;
 
-    for (var element in lister) {
-      print(element.name);
-    }
+    // for (var element in lister) {
+    //   // print(element.name);
+    // }
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> searchText(String keywords) {

@@ -63,7 +63,9 @@ class UsersControllerController extends GetxController {
 
       await result.user!.updateDisplayName(nameController.text);
       await result.user!.updatePhotoURL(
-          'https://www.pngitem.com/pimgs/m/99-998739_dale-engen-person-placeholder-hd-png-download.png');
+          'https://www.kindpng.com/picc/m/99-997900_headshot-silhouette-person-placeholder-hd-png-download.png');
+      // await result.user!.updatePhotoURL(
+      //     'https://www.pngitem.com/pimgs/m/99-998739_dale-engen-person-placeholder-hd-png-download.png');
 
       UserModels newUser = UserModels(
           email: emailController.text,
@@ -124,16 +126,16 @@ class UsersControllerController extends GetxController {
   Future<bool> isAdmin(String uid) async {
     try {
       var data = await firebaseFirestore.doc(uid).get();
-      var results = data.data();
-      print(results);
+      // var results = data.data();
+      // print(results);
       // UserModels userLogin = UserModels.fromJson(results!);
       if (data.data()?['isAdmin'] == true) {
-        print('u are admin');
+        // print('u are admin');
         imAdmin.value = true;
         return true;
       } else {
         imAdmin.value = false;
-        print('ur not admin');
+        // print('ur not admin');
         return false;
       }
 

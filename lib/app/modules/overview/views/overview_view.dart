@@ -27,6 +27,7 @@ class OverviewView extends GetView<OverviewController> {
         () => RefreshIndicator(
           onRefresh: resepController.streamDataOnDb,
           child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             // Header Section
 
             child: Padding(
