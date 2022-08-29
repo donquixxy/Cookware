@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/app/data/models/recipe_models.dart';
+import 'package:flutter_application_1/app/modules/bookmark/controllers/bookmark_controller.dart';
 import 'package:get/get.dart';
 
 class DetailscreenController extends GetxController {
   var firebaseFirestore = FirebaseFirestore.instance;
   var firebaseAuth = FirebaseAuth.instance;
+  var bookmarkController = Get.find<BookmarkController>();
 
   Recipes resep = Get.arguments[0];
   String documentId = Get.arguments[1];
@@ -19,6 +21,7 @@ class DetailscreenController extends GetxController {
         .doc(docId);
 
     Recipes _addedResep = Recipes(
+        id: documentId,
         name: resep.name,
         description: resep.description,
         listIngredients: resep.listIngredients,

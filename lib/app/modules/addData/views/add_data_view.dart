@@ -44,9 +44,8 @@ class AddDataView extends GetView<AddDataController> {
                               borderRadius: BorderRadius.circular(10),
                               child: Image.file(
                                 imagePickerController.image!,
-                                height: 150,
-                                width: 300,
-                                fit: BoxFit.fill,
+                                height: 200,
+                                fit: BoxFit.cover,
                               ),
                             )
                           : GestureDetector(

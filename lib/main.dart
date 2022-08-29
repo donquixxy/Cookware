@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
       debugShowCheckedModeBanner: false,
-      title: "Application",
+      title: "Cookware",
       initialRoute: Routes.LOGIN,
       getPages: AppPages.routes,
     );

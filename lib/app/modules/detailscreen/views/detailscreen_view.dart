@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/data/models/recipe_models.dart';
 
@@ -6,18 +7,12 @@ import 'package:get/get.dart';
 import '../controllers/detailscreen_controller.dart';
 
 class DetailscreenView extends GetView<DetailscreenController> {
-  Recipes resep = Get.arguments[0];
-  String documentId = Get.arguments[1];
-  var appBar2 = AppBar(
-    title: const Text('DetailscreenView'),
-    centerTitle: true,
-  );
   @override
   Widget build(BuildContext context) {
+    Recipes resep = Get.arguments[0];
+    String documentId = Get.arguments[1];
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
-    var paddingTop = MediaQuery.of(context).padding.top;
-    var heightBody = screenHeight - paddingTop - appBar2.preferredSize.height;
     var descRecipes = resep.description;
     List splittedDesc = descRecipes.split('.');
 
@@ -31,40 +26,40 @@ class DetailscreenView extends GetView<DetailscreenController> {
     return Scaffold(
       body: SingleChildScrollView(
           child: Stack(children: [
-        Container(
+        SizedBox(
           width: screenWidth,
           height: screenHeight * 0.35,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: NetworkImage(resep.imageUrl), fit: BoxFit.cover)),
-          child: SafeArea(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: const Icon(Icons.arrow_back)),
-                IconButton(
-                  onPressed: () {
-                    print(documentId);
-                    print(controller.firebaseAuth.currentUser);
-                    print('clicked');
-                    controller.addLikedIdToDB(
-                        docId: documentId,
-                        currentUserId:
-                            controller.firebaseAuth.currentUser!.uid);
-                    // controller.addDataToList(documentId: documentId);
-                    // controller.addLikedIdToDb(
-                    //     documentId: documentId,
-                    //     currentUser: FirebaseAuth.instance.currentUser!);
-                  },
-                  icon: const Icon(Icons.favorite_border),
+          child: CachedNetworkImage(
+            imageUrl: resep.imageUrl,
+            fit: BoxFit.cover,
+          ),
+        ),
+        SafeArea(
+          child: Align(
+            alignment: Alignment.topRight,
+            child: IconButton(
+                onPressed: () {
+                  controller.addLikedIdToDB(
+                      docId: documentId,
+                      currentUserId: controller.firebaseAuth.currentUser!.uid);
+                },
+                icon: const Icon(
+                  Icons.favorite_border,
                   color: Colors.pink,
-                )
-              ],
+                )),
+          ),
+        ),
+        SafeArea(
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
             ),
           ),
         ),
@@ -77,14 +72,13 @@ class DetailscreenView extends GetView<DetailscreenController> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                  child: Padding(
-                      padding: const EdgeInsets.only(top: 20, left: 30),
-                      child: Text(
-                        resep.name,
-                        style: const TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
-                      ))),
+              Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 30),
+                  child: Text(
+                    resep.name,
+                    style: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold),
+                  )),
               Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 2),
                 child: Row(
@@ -168,48 +162,45 @@ class DetailscreenView extends GetView<DetailscreenController> {
                   style: TextStyle(fontSize: 23),
                 ),
               ),
-              Container(
-                child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: splittedDesc.length,
-                  itemBuilder: (context, index) {
-                    var indexx = 1 + index;
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 25, bottom: 10),
-                      child: Column(
-                        children: [
-                          IntrinsicHeight(
-                            child: Row(
-                              children: [
-                                Text(
-                                  indexx.toString(),
-                                  style: const TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 16),
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                const VerticalDivider(
-                                  width: 15,
-                                  color: Colors.green,
-                                  thickness: 2,
-                                ),
-                                Expanded(
-                                  child: Text(splittedDesc[index],
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 100,
-                                      style: textStyle),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                ),
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: splittedDesc.length,
+                itemBuilder: (context, index) {
+                  var indexx = 1 + index;
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 25, bottom: 10),
+                    child: Column(
+                      children: [
+                        IntrinsicHeight(
+                          child: Row(
+                            children: [
+                              Text(
+                                indexx.toString(),
+                                style: const TextStyle(
+                                    fontStyle: FontStyle.italic, fontSize: 16),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              const VerticalDivider(
+                                width: 15,
+                                color: Colors.green,
+                                thickness: 2,
+                              ),
+                              Expanded(
+                                child: Text(splittedDesc[index],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 100,
+                                    style: textStyle),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
               )
             ],
           ),

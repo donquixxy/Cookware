@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/controllers/static_theme.dart';
 import 'package:flutter_application_1/app/controllers/users_controller_controller.dart';
@@ -7,14 +8,15 @@ import 'package:flutter_application_1/app/modules/home/views/home_view.dart';
 import 'package:flutter_application_1/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  final usersController = Get.put(UsersControllerController());
   @override
   Widget build(BuildContext context) {
+    var usersController = Get.put(UsersControllerController());
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Colors.transparent,
@@ -30,10 +32,29 @@ class LoginView extends GetView<LoginController> {
       // ),
       body: StreamBuilder(
         stream: usersController.streamUserLogin(),
-        builder: (context, snapshot) {
+        builder: (context, AsyncSnapshot<User?> snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
             if (snapshot.data != null) {
-              return HomeView();
+              return FutureBuilder(
+                future: usersController.isAdmin(snapshot.data!.uid),
+                builder:
+                    (BuildContext context, AsyncSnapshot<bool> snapshotData) {
+                  if (snapshotData.data == null) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshotData.data!) {
+                    usersController.imAdmin.value = true;
+                    return HomeView();
+                  } else if (snapshotData.connectionState ==
+                      ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return HomeView();
+                },
+              );
             }
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             {
@@ -83,17 +104,22 @@ class LoginView extends GetView<LoginController> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(26, 18, 26, 18),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(50, 50), primary: greenColor),
-                  onPressed: () {
-                    usersController.loginWithEmailPassword();
-                    // print('clicked');
-                  },
-                  child: Text(
-                    "SIGN IN",
-                    style: textStyle,
-                  ),
-                ),
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: Size(50, 50), primary: greenColor),
+                    onPressed: () {
+                      usersController.loginWithEmailPassword();
+                      // print('clicked');
+                    },
+                    child: Obx(
+                      () => controller.isClicked.isTrue
+                          ? Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            )
+                          : Text(
+                              "SIGN IN",
+                              style: textStyle,
+                            ),
+                    )),
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

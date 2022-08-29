@@ -6,12 +6,12 @@ import 'package:flutter_application_1/app/data/models/recipe_models.dart';
 import 'package:get/get.dart';
 
 class EditDataController extends GetxController {
-  //TODO: Implement EditDataController
   Recipes oldData = Get.arguments[0];
   var firstValue = [];
   List chipWord = [].obs;
 
   var resep = Recipes(
+          id: '',
           name: '',
           description: '',
           listIngredients: [],
@@ -50,6 +50,7 @@ class EditDataController extends GetxController {
       TextEditingController(text: resep.value.imageUrl);
 
   void getNewData() {
+
     chipWord = oldData.listIngredients;
     resep.value.name = oldData.name;
     resep.value.description = oldData.description;
@@ -59,14 +60,14 @@ class EditDataController extends GetxController {
     resep.value.imageUrl = oldData.imageUrl;
     resep.value.uidCreator = oldData.uidCreator;
 
-    print(resep.value.name);
-    print(resep.value.listIngredients);
-    print(resep.value.cookTime);
+    // print(resep.value.name);
+    // print(resep.value.listIngredients);
+    // print(resep.value.cookTime);
   }
 
   void addDataToChip(String text) {
     chipWord.add(text);
-    print(chipWord);
+    // print(chipWord);
     chipWordController.clear();
     resep.refresh();
   }
@@ -83,7 +84,7 @@ class EditDataController extends GetxController {
           Get.back();
           resep.refresh();
         });
-    print('rebuild');
+    // print('rebuild');
   }
 
   Future<DocumentSnapshot<Map<String, dynamic>>> getDataFromDb(
@@ -95,43 +96,37 @@ class EditDataController extends GetxController {
 
   Future<void> updateDataOnDb(String id, String currentUid) async {
     try {
-      if (resep.value.uidCreator == currentUid) {
-        Recipes newData = Recipes(
-            name: namaResepController.text,
-            description: deskripsiController.text,
-            listIngredients: chipWord,
-            cookTime: cookTimeController.text,
-            recipeBy: firebaseAuth.currentUser!.displayName!,
-            imageUrl: oldData.imageUrl,
-            uidCreator: firebaseAuth.currentUser!.uid);
+      // if (resep.value.uidCreator == currentUid) {
+      Recipes newData = Recipes(
+          id: oldData.id,
+          name: namaResepController.text,
+          description: deskripsiController.text,
+          listIngredients: chipWord,
+          cookTime: cookTimeController.text,
+          recipeBy: firebaseAuth.currentUser!.displayName!,
+          imageUrl: oldData.imageUrl,
+          uidCreator: firebaseAuth.currentUser!.uid);
 
-        firebaseFirestore
-            .collection('Recipes')
-            .doc(id)
-            .update(newData.toJson());
-        // Get.defaultDialog(
-        //     title: 'Data Updated',
-        //     middleText: 'Data berhasil terupdate',
-        //     textConfirm: 'Ok',
-        //     onConfirm: () {
-        //       Get.back();
-        //       Get.back();
-        //     });
+      firebaseFirestore.collection('Recipes').doc(id).update(newData.toJson());
 
-        Get.snackbar(
-          'Data Updated',
-          'Data Berhasil Terupdate',
-          showProgressIndicator: true,
-        );
-      } else {
-        Get.defaultDialog(
-            title: 'Error',
-            middleText: 'Gagal Mengupdate, bukan data anda',
-            textConfirm: 'Ok',
-            onConfirm: () {
-              Get.back();
-            });
-      }
+      // print(newData.name);
+      // print(newData.id);
+      // print(newData.recipeBy);
+
+      Get.snackbar(
+        'Data Updated',
+        'Data Berhasil Terupdate',
+        showProgressIndicator: true,
+      );
+      // } else {
+      //   Get.defaultDialog(
+      //       title: 'Error',
+      //       middleText: 'Gagal Mengupdate, bukan data anda',
+      //       textConfirm: 'Ok',
+      //       onConfirm: () {
+      //         Get.back();
+      //       });
+      // }
       resep.refresh();
     } on FirebaseException catch (error) {
       Get.defaultDialog(
@@ -147,7 +142,7 @@ class EditDataController extends GetxController {
   @override
   void dispose() {
     chipWordController.dispose();
-    print('dispoed');
+    // print('dispoed');
     super.dispose();
   }
 }

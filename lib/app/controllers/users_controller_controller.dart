@@ -25,6 +25,7 @@ class UsersControllerController extends GetxController {
   final firebaseAuth = FirebaseAuth.instance;
   final googleSignIn = GoogleSignIn();
   final firebaseFirestore = FirebaseFirestore.instance.collection('Users');
+  var imAdmin = false.obs;
 
   var nameController = TextEditingController();
   var emailController = TextEditingController();
@@ -37,13 +38,14 @@ class UsersControllerController extends GetxController {
 
   Future<void> userLogout() async {
     await firebaseAuth.signOut();
-    await googleSignIn.signOut();
+    imAdmin.value = false;
+    googleSignIn.signOut();
   }
 
   Future<UserCredential?> createEmailPassword() async {
     try {
       if (nameController.text.isEmpty &&
-          nameController.text.isEmpty &&
+          emailController.text.isEmpty &&
           passwordController.text.isEmpty) {
         Get.defaultDialog(
           title: 'Error',
@@ -61,14 +63,17 @@ class UsersControllerController extends GetxController {
 
       await result.user!.updateDisplayName(nameController.text);
       await result.user!.updatePhotoURL(
-          'https://www.pngitem.com/pimgs/m/99-998739_dale-engen-person-placeholder-hd-png-download.png');
+          'https://www.kindpng.com/picc/m/99-997900_headshot-silhouette-person-placeholder-hd-png-download.png');
+      // await result.user!.updatePhotoURL(
+      //     'https://www.pngitem.com/pimgs/m/99-998739_dale-engen-person-placeholder-hd-png-download.png');
 
       UserModels newUser = UserModels(
           email: emailController.text,
           displayName: nameController.text,
-          uid: uid);
+          uid: uid,
+          isAdmin: false);
 
-      firebaseFirestore.doc(uid).set(newUser.toJson());
+      await firebaseFirestore.doc(uid).set(newUser.toJson());
 
       Get.defaultDialog(
         title: 'Daftar Berhasil',
@@ -99,9 +104,9 @@ class UsersControllerController extends GetxController {
 
   Future<UserCredential?> loginWithEmailPassword() async {
     try {
-      nameController.clear();
-      emailController.clear();
-      passwordController.clear();
+      // nameController.clear();
+      // emailController.clear();
+      // passwordController.clear();
       var userResult = await firebaseAuth.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
       return userResult;
@@ -116,5 +121,42 @@ class UsersControllerController extends GetxController {
       );
     }
     return null;
+  }
+
+  Future<bool> isAdmin(String uid) async {
+    try {
+      var data = await firebaseFirestore.doc(uid).get();
+      // var results = data.data();
+      // print(results);
+      // UserModels userLogin = UserModels.fromJson(results!);
+      if (data.data()?['isAdmin'] == true) {
+        // print('u are admin');
+        imAdmin.value = true;
+        return true;
+      } else {
+        imAdmin.value = false;
+        // print('ur not admin');
+        return false;
+      }
+
+      // if (userLogin.isAdmin) {
+      //   imAdmin.value = false;
+      //   return true;
+      // } else {
+      //   imAdmin.value = false;
+      //   return false;
+      // }
+
+      // print(result.length);
+      // print(result);
+    } on Exception {
+      Get.defaultDialog(
+          textConfirm: 'Terjadi Kesalahan',
+          onConfirm: () {
+            Get.back();
+          });
+
+      return false;
+    }
   }
 }

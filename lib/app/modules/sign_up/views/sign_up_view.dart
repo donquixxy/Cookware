@@ -9,9 +9,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/sign_up_controller.dart';
 
 class SignUpView extends GetView<SignUpController> {
-  var usersController = Get.find<UsersControllerController>();
   @override
   Widget build(BuildContext context) {
+    var usersController = Get.find<UsersControllerController>();
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Colors.transparent,
@@ -28,72 +28,70 @@ class SignUpView extends GetView<SignUpController> {
       //         fontWeight: FontWeight.w600),
       //   ),
       // ),
-      body: Container(
-        child: ListView(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 50),
-              child: Icon(
-                Icons.restaurant_menu_sharp,
-                size: 100,
-                color: greenColor,
+      body: ListView(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 50),
+            child: const Icon(
+              Icons.restaurant_menu_sharp,
+              size: 100,
+              color: greenColor,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(26, 18, 26, 10),
+            child: Text(
+              'Create an \naccount',
+              style: textStyle.copyWith(
+                fontFamily: GoogleFonts.inter().fontFamily,
+                fontSize: 32,
+                color: Colors.black87,
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(26, 18, 26, 10),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 2, 8, 0),
+            child: textFieldBuilder(
+                'Name', usersController.nameController, false, Icons.person),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 2, 8, 0),
+            child: textFieldBuilder('Your Email',
+                usersController.emailController, false, Icons.email),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 2, 8, 0),
+            child: textFieldBuilder('Password',
+                usersController.passwordController, true, Icons.password),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(26, 10, 26, 8),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(50, 50), primary: greenColor),
+              onPressed: () {
+                // print('clicked');
+                usersController.createEmailPassword();
+              },
               child: Text(
-                'Create an \naccount',
-                style: textStyle.copyWith(
-                  fontFamily: GoogleFonts.inter().fontFamily,
-                  fontSize: 32,
-                  color: Colors.black87,
-                ),
+                "SIGN UP",
+                style: textStyle,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 2, 8, 0),
-              child: textFieldBuilder(
-                  'Name', usersController.nameController, false, Icons.person),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 2, 8, 0),
-              child: textFieldBuilder('Your Email',
-                  usersController.emailController, false, Icons.email),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 2, 8, 0),
-              child: textFieldBuilder('Password',
-                  usersController.passwordController, true, Icons.password),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(26, 10, 26, 8),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(50, 50), primary: greenColor),
-                onPressed: () async {
-                  // print('clicked');
-                  await usersController.createEmailPassword();
-                },
-                child: Text(
-                  "SIGN UP",
-                  style: textStyle,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/controllers/static_theme.dart';
@@ -57,7 +58,7 @@ class BookmarkView extends GetView<BookmarkController> {
                     ),
                   ),
                   ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
+                    physics: ClampingScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -73,19 +74,23 @@ class BookmarkView extends GetView<BookmarkController> {
                         child: Container(
                           padding: const EdgeInsets.all(8.0),
                           child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
                             elevation: 3,
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 //Image Section
-                                Container(
-                                  child: Image.network(
-                                    resepData.imageUrl,
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: CachedNetworkImage(
+                                    imageUrl: resepData.imageUrl,
                                     height: 120,
                                     width: 120,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
+
                                 //End of Image Section
 
                                 Expanded(
@@ -96,23 +101,20 @@ class BookmarkView extends GetView<BookmarkController> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                resepData.name,
-                                                maxLines: 1,
-                                                overflow: TextOverflow.clip,
-                                                style: const TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                              ),
-                                              const SizedBox(
-                                                width: 50,
-                                              ),
-                                            ],
-                                          ),
+                                        Column(
+                                          children: [
+                                            Text(
+                                              resepData.name,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.clip,
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            const SizedBox(
+                                              width: 50,
+                                            ),
+                                          ],
                                         ),
                                         Container(
                                           padding:
